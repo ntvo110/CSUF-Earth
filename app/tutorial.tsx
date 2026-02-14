@@ -50,7 +50,7 @@ export default function Tutorial() {
       listRef.current?.scrollToIndex({ index: index + 1, animated: true });
     } else {
       // TODO: change this route to wherever your app goes after tutorial
-      router.replace("/welcome");
+      router.replace("/map");
     }
   };
 
