@@ -99,6 +99,9 @@ export default function Login() {
         : <Text>Sign-in</Text>}
       </TouchableOpacity>
 
+      <TouchableOpacity onPress={() => router.push('/register')}>
+        <Text>Don't have an account? Register</Text>
+      </TouchableOpacity>
     </View>
   );
 }
