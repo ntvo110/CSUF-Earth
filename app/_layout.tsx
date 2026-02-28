@@ -1,5 +1,15 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
+
 
 export default function RootLayout() {
-  return <Stack />;
+  const router = useRouter();
+
+
+  return (
+    <Stack>
+      <Stack.Screen name="db-testing" options={{ headerShown: false}} />
+      <Stack.Screen name="test" options={{ headerShown: false}} />
+    </Stack>
+
+  );
 }
