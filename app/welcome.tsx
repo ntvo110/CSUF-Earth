@@ -20,8 +20,7 @@ export default function Welcome() {
   const s = useMemo(() => width / BASE_W, [width]);
   const px = (n: number) => Math.round(n * s);
 
-  // --- Login blob (start) ---
-  // from your login figma: w=642 h=506 left=-120 top=657
+  // Start blob from auth screen
   const LOGIN = useMemo(
     () => ({
       w: px(642),
@@ -33,8 +32,7 @@ export default function Welcome() {
     [s]
   );
 
-  // --- Welcome blob (end) ---
-  // from your welcome figma: w=642 h=653 left=-120 top=131
+  // End blob on welcome screen
   const WELCOME = useMemo(
     () => ({
       w: px(642),
@@ -46,15 +44,27 @@ export default function Welcome() {
     [s]
   );
 
-  // Animated values
-  const blobTop = useRef(new Animated.Value(params.from === "login" ? LOGIN.top : WELCOME.top)).current;
-  const blobH = useRef(new Animated.Value(params.from === "login" ? LOGIN.h : WELCOME.h)).current;
-  const contentOpacity = useRef(new Animated.Value(params.from === "login" ? 0 : 1)).current;
-  const contentY = useRef(new Animated.Value(params.from === "login" ? px(10) : 0)).current;
+  const shouldAnimate =
+    params.from === "login" || params.from === "signup";
+
+  const blobTop = useRef(
+    new Animated.Value(shouldAnimate ? LOGIN.top : WELCOME.top)
+  ).current;
+
+  const blobH = useRef(
+    new Animated.Value(shouldAnimate ? LOGIN.h : WELCOME.h)
+  ).current;
+
+  const contentOpacity = useRef(
+    new Animated.Value(shouldAnimate ? 0 : 1)
+  ).current;
+
+  const contentY = useRef(
+    new Animated.Value(shouldAnimate ? px(10) : 0)
+  ).current;
 
   useEffect(() => {
-    if (params.from === "login") {
-      // Start blob from login values
+    if (shouldAnimate) {
       blobTop.setValue(LOGIN.top);
       blobH.setValue(LOGIN.h);
       contentOpacity.setValue(0);
@@ -86,10 +96,10 @@ export default function Welcome() {
         ]).start();
       });
     }
-  }, [params.from, s]);
+  }, [shouldAnimate, s]);
 
   const onContinue = () => {
-    router.push("/tutorial"); // your tutorial route
+    router.push("/tutorial");
   };
 
   return (
@@ -97,7 +107,12 @@ export default function Welcome() {
       <Pressable style={styles.flex} onPress={onContinue}>
         <View style={styles.stage}>
           {/* background */}
-          <View style={[StyleSheet.absoluteFillObject, { backgroundColor: "#F2F2F2" }]} />
+          <View
+            style={[
+              StyleSheet.absoluteFillObject,
+              { backgroundColor: "#F2F2F2" },
+            ]}
+          />
 
           {/* animated blob */}
           <Animated.View
@@ -120,7 +135,7 @@ export default function Welcome() {
             />
           </Animated.View>
 
-          {/* Center content */}
+          {/* center content */}
           <Animated.View
             style={{
               flex: 1,
@@ -131,8 +146,14 @@ export default function Welcome() {
               paddingHorizontal: px(24),
             }}
           >
-            {/* icon (placeholder) - replace with your SVG/image later */}
-            <View style={{ width: px(96), height: px(96), alignItems: "center", justifyContent: "center" }}>
+            <View
+              style={{
+                width: px(96),
+                height: px(96),
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <View
                 style={{
                   width: px(64),
@@ -143,11 +164,25 @@ export default function Welcome() {
               />
             </View>
 
-            <Text style={{ marginTop: px(14), color: "#272BA0", fontSize: px(32), fontWeight: "500" }}>
+            <Text
+              style={{
+                marginTop: px(14),
+                color: "#272BA0",
+                fontSize: px(32),
+                fontWeight: "500",
+              }}
+            >
               welcome to
             </Text>
 
-            <Text style={{ marginTop: px(12), color: "#272BA0", fontSize: px(48), fontWeight: "500" }}>
+            <Text
+              style={{
+                marginTop: px(12),
+                color: "#272BA0",
+                fontSize: px(48),
+                fontWeight: "500",
+              }}
+            >
               CSUF
             </Text>
 
@@ -165,7 +200,6 @@ export default function Welcome() {
               Find your classes easily and navigate your way through campus.
             </Text>
 
-            {/* subtle hint (optional) */}
             <Text
               style={{
                 marginTop: px(26),

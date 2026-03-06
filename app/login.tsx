@@ -42,8 +42,7 @@ export default function Login() {
 
 
   const handleSignUp = () => {
-    // If you make a signup screen later, switch to:
-    // router.push("/signup");
+  router.push("/signup");
   };
 
   return (
