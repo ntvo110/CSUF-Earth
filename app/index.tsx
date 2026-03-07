@@ -16,8 +16,8 @@ export default function Index() {
       <Link href = '/test'>
         <Button title = 'next page'/>
       </Link>
-      <Link href = '/db-testing'>
-        <Button title = 'db testing'/>
+      <Link href = '/login'>
+        <Button title = 'login'/>
       </Link>
     </View>
 
