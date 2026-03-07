@@ -22,7 +22,7 @@ type Slide = {
 };
 
 const SLIDES: Slide[] = [
-  { title: "to begin.." },
+  { title: "to begin..", subtitle: "Find your classrooms quickly with indoor navigation." },
   { title: "placeholder", subtitle: "discover campus features and stay\nconnected" },
   { title: "placeholder", subtitle: "you're all set! let's explore campus\ntogether" },
 ];

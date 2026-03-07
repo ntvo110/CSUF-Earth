@@ -3,6 +3,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useMemo, useRef } from "react";
 import {
   Animated,
+  Image,
   Pressable,
   SafeAreaView,
   StyleSheet,
@@ -148,18 +149,18 @@ export default function Welcome() {
           >
             <View
               style={{
-                width: px(96),
-                height: px(96),
+                width: px(110),
+                height: px(110),
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <View
+              <Image
+                source={require("@/assets/images/Tuffy_App_Icon.png")}
                 style={{
-                  width: px(64),
-                  height: px(80),
-                  backgroundColor: "#FF7900",
-                  borderRadius: px(32),
+                  width: px(110),
+                  height: px(110),
+                  resizeMode: "contain",
                 }}
               />
             </View>
@@ -180,7 +181,8 @@ export default function Welcome() {
                 marginTop: px(12),
                 color: "#272BA0",
                 fontSize: px(48),
-                fontWeight: "500",
+                fontWeight: "700",
+                letterSpacing: 1,
               }}
             >
               CSUF

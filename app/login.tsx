@@ -1,11 +1,12 @@
 import CSUFButton from "@/components/CSUFButton";
-import { auth, db } from '@/components/firebaseConfig';
+import { auth, db } from "@/components/firebaseConfig";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useMemo, useState } from "react";
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
@@ -17,49 +18,41 @@ import {
   View,
 } from "react-native";
 
-
-
 export default function Login() {
   const { width, height } = useWindowDimensions();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  // Figma export base width = 402 (iPhone 16 Pro/Max frame in your code)
   const BASE_W = 402;
   const s = useMemo(() => width / BASE_W, [width]);
   const px = (n: number) => Math.round(n * s);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
-    setError('');
-
+    setError("");
 
     try {
-
       const userCreds = await signInWithEmailAndPassword(auth, email, password);
       const uid = userCreds.user.uid;
-      const userRef = doc(db, 'users', uid);
-      console.log(userRef);
+      const userRef = doc(db, "users", uid);
       const userSnap = await getDoc(userRef);
-      
 
       if (!userSnap.exists()) {
-        setError('User profile not found in database');
+        setError("User profile not found in database");
         return;
       }
 
       const userData = userSnap.data();
-      console.log('Logged in user:', userData);
+      console.log("Logged in user:", userData);
 
       router.push({
         pathname: "/welcome",
         params: { from: "login" },
       });
-
     } catch (err: any) {
       setError(getErrorMessage(err.code));
     }
@@ -67,29 +60,28 @@ export default function Login() {
 
   const getErrorMessage = (code: any) => {
     switch (code) {
-      case 'auth/invalid-email':
-        return 'Invalid email address';
-      case 'auth/user-not-found':
-        return 'No account found with this email';
-      case 'auth/wrong-password':
-        return 'Incorrect password';
-      case 'auth/too-many-requests':
-        return 'Too many attempts. Try again later';
+      case "auth/invalid-email":
+        return "Invalid email address";
+      case "auth/user-not-found":
+        return "No account found with this email";
+      case "auth/wrong-password":
+        return "Incorrect password";
+      case "auth/too-many-requests":
+        return "Too many attempts. Try again later";
       default:
-        return 'Login failed.';
+        return "Login failed.";
     }
-  }
-
-  const handleGuest = () => {
-  router.push({
-    pathname: "/welcome",
-    params: { from: "login" },
-  });
   };
 
+  const handleGuest = () => {
+    router.push({
+      pathname: "/welcome",
+      params: { from: "login" },
+    });
+  };
 
   const handleSignUp = () => {
-  router.push("/signup");
+    router.push("/signup");
   };
 
   return (
@@ -99,10 +91,11 @@ export default function Login() {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <View style={[styles.stage, { width, height }]}>
-          {/* Background color */}
+          
+          {/* Background */}
           <View style={[StyleSheet.absoluteFillObject, { backgroundColor: "#F2F2F2" }]} />
 
-          {/* Bottom gradient blob (from your Figma code) */}
+          {/* Bottom Gradient */}
           <LinearGradient
             colors={["#F2F2F2", "#5797F7", "#152948"]}
             locations={[0, 0.42, 0.83]}
@@ -118,46 +111,39 @@ export default function Login() {
             }}
           />
 
-          {/* Orange icon placeholder (replace later with SVG if you want) */}
+          {/* Header (Logo + Title) */}
           <View
             style={{
               position: "absolute",
-              width: px(96),
-              height: px(96),
-              left: px(150),
-              top: px(164),
+              top: px(150),
+              width: width,
               alignItems: "center",
-              justifyContent: "center",
             }}
           >
-            <View
+            <Image
+              source={require("@/assets/images/Tuffy_App_Icon.png")}
               style={{
-                width: px(64),
-                height: px(80),
-                backgroundColor: "#FF7900",
-                borderRadius: px(32),
+                width: px(110),
+                height: px(110),
+                resizeMode: "contain",
+                marginBottom: px(10),
               }}
             />
+
+            <Text
+              style={{
+                color: "#272BA0",
+                fontSize: px(48),
+                fontWeight: "700",
+                letterSpacing: 1,
+                textAlign: "center",
+              }}
+            >
+              CSUF
+            </Text>
           </View>
 
-          {/* CSUF text */}
-          <Text
-            style={{
-              position: "absolute",
-              width: px(320),
-              height: px(66),
-              left: px(40),
-              top: px(293),
-              textAlign: "center",
-              color: "#272BA0",
-              fontSize: px(48),
-              fontWeight: "500",
-            }}
-          >
-            CSUF
-          </Text>
-
-          {/* Glass card */}
+          {/* Glass Card */}
           <View
             style={{
               position: "absolute",
@@ -175,17 +161,22 @@ export default function Login() {
             }}
           />
 
-          {error ? <Text
-            style={{
-              position: "absolute",
-              left: px(63),
-              top: px(365),
-              fontSize: px(16),
-              fontWeight: "500",
-              color: "#2C2C2C",
-            }}>{error}</Text> : null}
+          {error ? (
+            <Text
+              style={{
+                position: "absolute",
+                left: px(63),
+                top: px(365),
+                fontSize: px(16),
+                fontWeight: "500",
+                color: "#2C2C2C",
+              }}
+            >
+              {error}
+            </Text>
+          ) : null}
 
-          {/* Email label */}
+          {/* Email Label */}
           <Text
             style={{
               position: "absolute",
@@ -199,7 +190,7 @@ export default function Login() {
             email address
           </Text>
 
-          {/* Email input */}
+          {/* Email Input */}
           <View
             style={{
               position: "absolute",
@@ -230,7 +221,7 @@ export default function Login() {
             />
           </View>
 
-          {/* Password label */}
+          {/* Password Label */}
           <Text
             style={{
               position: "absolute",
@@ -244,7 +235,7 @@ export default function Login() {
             password
           </Text>
 
-          {/* Password input */}
+          {/* Password Input */}
           <View
             style={{
               position: "absolute",
@@ -274,20 +265,19 @@ export default function Login() {
             />
           </View>
 
-          {/* Login button */}
+          {/* Login Button */}
           <CSUFButton
-           title="log in"
-           onPress={handleLogin}
-           variant="figmaSmall"
-           style={{
-             position: "absolute",
-             left: px(106),
+            title="log in"
+            onPress={handleLogin}
+            variant="figmaSmall"
+            style={{
+              position: "absolute",
+              left: px(106),
               top: px(577),
-              }}
-              
+            }}
           />
 
-          {/* don't have an account? Sign up */}
+          {/* Sign Up */}
           <View
             style={{
               position: "absolute",
@@ -309,7 +299,7 @@ export default function Login() {
             </Text>
           </View>
 
-          {/* continue as a guest */}
+          {/* Guest */}
           <TouchableOpacity
             onPress={handleGuest}
             activeOpacity={0.7}
@@ -335,6 +325,7 @@ export default function Login() {
               continue as a guest
             </Text>
           </TouchableOpacity>
+
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
