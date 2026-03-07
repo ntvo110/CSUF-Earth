@@ -1,5 +1,9 @@
+import CSUFButton from "@/components/CSUFButton";
+import { auth, db } from '@/components/firebaseConfig';
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import React, { useMemo, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -13,25 +17,73 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
-import CSUFButton from "../components/CSUFButton";
 
 export default function Signup() {
   const { width } = useWindowDimensions();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const updateField = (field: any, value: any) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+  }
+  
+  const [error, setError] = useState('');
 
   const BASE_W = 402;
   const s = useMemo(() => width / BASE_W, [width]);
   const px = (n: number) => Math.round(n * s);
 
-  const handleCreateAccount = () => {
-    router.push({
-      pathname: "/welcome",
-      params: { from: "signup" },
-    });
+  const validate = () => {
+    if (!form.firstName || !form.email || !form.password || !form.confirmPassword) {
+      setError('Please fill in all fields');
+      return false;
+    }
+    if (form.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return false;
+    }
+    if (form.password !== form.confirmPassword){
+      setError('Passwords do not match');
+      return false;
+    }
+    return true;
+
+  };
+
+  const handleCreateAccount = async () => {
+    if (!validate()) return;
+
+    setError('');
+    try {
+      const userCreds = await createUserWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+      const uid = userCreds.user.uid;
+
+      await setDoc(doc(db, 'users', uid), {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        createdAt: serverTimestamp(),
+      });
+
+      router.push({
+        pathname: "/welcome",
+        params: { from: "signup" },
+      });
+
+    } catch (err: any) {
+      setError(getErrorMessage(err.code));
+    } 
+
   };
 
   const handleLogin = () => {
@@ -43,6 +95,15 @@ export default function Signup() {
       pathname: "/welcome",
       params: { from: "signup" },
     });
+  };
+
+  const getErrorMessage = (code: any) => {
+    switch (code) {
+      case 'auth/email-already-in-use': return 'An account with this email already exists';
+      case 'auth/invalid-email': return 'Invalid email address';
+      case 'auth/weak-password': return 'Password is too weak';
+      default: return 'Registration failed.';
+    }
   };
 
   return (
@@ -121,7 +182,7 @@ export default function Signup() {
               style={{
                 position: "absolute",
                 width: px(320),
-                height: px(610),
+                height: px(707),
                 left: px(40),
                 top: px(300),
                 borderRadius: px(34),
@@ -133,6 +194,16 @@ export default function Signup() {
                 elevation: 6,
               }}
             />
+
+            {error ? <Text
+              style={{
+                position: "absolute",
+                left: px(63),
+                top: px(315),
+                fontSize: px(16),
+                fontWeight: "500",
+                color: "#2C2C2C",
+              }}>{error}</Text> : null}
 
             {/* First name */}
             <Text
@@ -164,8 +235,8 @@ export default function Signup() {
               }}
             >
               <TextInput
-                value={firstName}
-                onChangeText={setFirstName}
+                value={form.firstName}
+                onChangeText={(val) => updateField('firstName', val)}
                 placeholder="First Name Here"
                 placeholderTextColor="#CFCFCF"
                 style={{
@@ -173,6 +244,7 @@ export default function Signup() {
                   fontWeight: "500",
                   color: "#2C2C2C",
                 }}
+                autoCapitalize='words'
               />
             </View>
 
@@ -206,8 +278,8 @@ export default function Signup() {
               }}
             >
               <TextInput
-                value={lastName}
-                onChangeText={setLastName}
+                value={form.lastName}
+                onChangeText={(val) => updateField('lastName', val)}
                 placeholder="Last Name Here"
                 placeholderTextColor="#CFCFCF"
                 style={{
@@ -215,6 +287,7 @@ export default function Signup() {
                   fontWeight: "500",
                   color: "#2C2C2C",
                 }}
+                autoCapitalize='words'
               />
             </View>
 
@@ -248,8 +321,8 @@ export default function Signup() {
               }}
             >
               <TextInput
-                value={email}
-                onChangeText={setEmail}
+                value={form.email}
+                onChangeText={(val) => updateField('email', val)}
                 placeholder="example@csu.fullerton.edu"
                 placeholderTextColor="#CFCFCF"
                 autoCapitalize="none"
@@ -292,9 +365,52 @@ export default function Signup() {
               }}
             >
               <TextInput
-                value={password}
-                onChangeText={setPassword}
-                placeholder="abx&sf#rrr"
+                value={form.password}
+                onChangeText={(val) => updateField('password', val)}
+                placeholder="Password must be 6 characters"
+                placeholderTextColor="#CFCFCF"
+                secureTextEntry
+                style={{
+                  fontSize: px(13),
+                  fontWeight: "500",
+                  color: "#2C2C2C",
+                }}
+              />
+            </View>
+
+             {/* Password */}
+            <Text
+              style={{
+                position: "absolute",
+                left: px(63),
+                top: px(733),
+                fontSize: px(16),
+                fontWeight: "500",
+                color: "#2C2C2C",
+              }}
+            >
+              confirm password
+            </Text>
+
+            <View
+              style={{
+                position: "absolute",
+                width: px(272),
+                height: px(40),
+                left: px(62),
+                top: px(765),
+                backgroundColor: "#FFFFFF",
+                borderRadius: px(12),
+                borderWidth: 1,
+                borderColor: "#F2F2F2",
+                justifyContent: "center",
+                paddingHorizontal: px(12),
+              }}
+            >
+              <TextInput
+                value={form.confirmPassword}
+                onChangeText={(val) => updateField('confirmPassword', val)}
+                placeholder="confirm password"
                 placeholderTextColor="#CFCFCF"
                 secureTextEntry
                 style={{
@@ -313,7 +429,7 @@ export default function Signup() {
               style={{
                 position: "absolute",
                 left: px(106),
-                top: px(745),
+                top: px(842),
               }}
             />
 
@@ -322,7 +438,7 @@ export default function Signup() {
               style={{
                 position: "absolute",
                 left: px(89),
-                top: px(810),
+                top: px(907),
                 flexDirection: "row",
                 alignItems: "center",
               }}
@@ -349,7 +465,7 @@ export default function Signup() {
                 position: "absolute",
                 width: px(182),
                 left: px(106),
-                top: px(840),
+                top: px(937),
               }}
             >
               <Text
