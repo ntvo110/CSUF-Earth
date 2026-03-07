@@ -32,10 +32,7 @@ export default function Signup() {
   const updateField = (field: any, value: any) => {
     setForm(prev => ({ ...prev, [field]: value }));
   }
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  
   const [error, setError] = useState('');
 
   const BASE_W = 402;
