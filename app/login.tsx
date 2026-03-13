@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -100,6 +101,10 @@ export default function Login() {
         style={styles.flex}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: px(180) }}
+          showsVerticalScrollIndicator={false}
+        >
         <View style={[styles.stage, { width, height }]}>
           {/* Background color */}
           <View style={[StyleSheet.absoluteFillObject, { backgroundColor: "#F2F2F2" }]} />
@@ -276,6 +281,7 @@ export default function Login() {
             </ThemedText>
           </TouchableOpacity>
         </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
