@@ -1,5 +1,7 @@
 import CSUFButton from "@/components/CSUFButton";
 import { auth, db } from '@/components/firebaseConfig';
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -141,78 +143,42 @@ export default function Login() {
           </View>
 
           {/* CSUF text */}
-          <Text
+          <ThemedText type="title"
             style={{
-              position: "absolute",
-              width: px(320),
               height: px(66),
-              left: px(40),
               top: px(293),
-              textAlign: "center",
-              color: "#272BA0",
               fontSize: px(48),
-              fontWeight: "500",
             }}
           >
             CSUF
-          </Text>
+          </ThemedText>
 
           {/* Glass card */}
-          <View
+          <ThemedView type="glass" 
             style={{
-              position: "absolute",
-              width: px(320),
               height: px(361),
-              left: px(40),
               top: px(352),
-              borderRadius: px(34),
-              backgroundColor: "rgba(250,250,250,0.70)",
-              shadowColor: "#000",
-              shadowOpacity: 0.12,
-              shadowRadius: px(20),
-              shadowOffset: { width: px(10), height: px(12) },
-              elevation: 6,
             }}
           />
 
-          {error ? <Text
+          {error ? <ThemedText type="label"
             style={{
-              position: "absolute",
-              left: px(63),
               top: px(365),
-              fontSize: px(16),
-              fontWeight: "500",
-              color: "#2C2C2C",
-            }}>{error}</Text> : null}
+            }}>{error}</ThemedText> : null}
 
           {/* Email label */}
-          <Text
+          <ThemedText type="label"
             style={{
-              position: "absolute",
-              left: px(63),
-              top: px(390),
-              fontSize: px(16),
-              fontWeight: "500",
-              color: "#2C2C2C",
+              top: px(390)
             }}
           >
             email address
-          </Text>
+          </ThemedText>
 
           {/* Email input */}
-          <View
+          <ThemedView type="input"
             style={{
-              position: "absolute",
-              width: px(272),
-              height: px(40),
-              left: px(62),
-              top: px(422),
-              backgroundColor: "#FFFFFF",
-              borderRadius: px(12),
-              borderWidth: 1,
-              borderColor: "#F2F2F2",
-              justifyContent: "center",
-              paddingHorizontal: px(12),
+              top: px(422),  
             }}
           >
             <TextInput
@@ -228,36 +194,21 @@ export default function Login() {
                 color: "#2C2C2C",
               }}
             />
-          </View>
+          </ThemedView>
 
           {/* Password label */}
-          <Text
+          <ThemedText type="label"
             style={{
-              position: "absolute",
-              left: px(63),
-              top: px(480),
-              fontSize: px(16),
-              fontWeight: "500",
-              color: "#2C2C2C",
+              top: px(480)
             }}
           >
             password
-          </Text>
+          </ThemedText>
 
           {/* Password input */}
-          <View
+          <ThemedView type="input"
             style={{
-              position: "absolute",
-              width: px(272),
-              height: px(40),
-              left: px(63),
               top: px(512),
-              backgroundColor: "#FFFFFF",
-              borderRadius: px(12),
-              borderWidth: 1,
-              borderColor: "#F2F2F2",
-              justifyContent: "center",
-              paddingHorizontal: px(12),
             }}
           >
             <TextInput
@@ -272,7 +223,7 @@ export default function Login() {
                 color: "#2C2C2C",
               }}
             />
-          </View>
+          </ThemedView>
 
           {/* Login button */}
           <CSUFButton
@@ -320,20 +271,9 @@ export default function Login() {
               top: px(663),
             }}
           >
-            <Text
-              style={{
-                textAlign: "center",
-                fontSize: px(14),
-                fontWeight: "500",
-                color: "#000",
-                textDecorationLine: "underline",
-                textShadowColor: "rgba(0,0,0,0.25)",
-                textShadowOffset: { width: 0, height: px(4) },
-                textShadowRadius: px(4),
-              }}
-            >
+            <ThemedText type="guest">
               continue as a guest
-            </Text>
+            </ThemedText>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

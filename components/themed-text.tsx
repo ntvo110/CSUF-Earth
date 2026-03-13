@@ -1,11 +1,12 @@
-import { StyleSheet, Text, type TextProps } from "react-native";
+import { useMemo } from "react";
+import { StyleSheet, Text, useWindowDimensions, type TextProps } from "react-native";
 
 import { useThemeColor } from '@/hooks/use-theme-color';
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'label' | 'guest';
 };
 
 export function ThemedText({
@@ -16,6 +17,7 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+
       return (
         <Text
           style={[
@@ -25,12 +27,19 @@ export function ThemedText({
             type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
             type === 'subtitle' ? styles.subtitle : undefined,
             type === 'link' ? styles.link : undefined,
+            type === 'label' ? styles.label : undefined,
+            type === 'guest' ? styles.guest : undefined,
             style,
           ]}
           {...rest}
         />
       );
 }
+const { width, height } = useWindowDimensions();
+const BASE_W = 402;
+const s = useMemo(() => width / BASE_W, [width]);
+const px = (n: number) => Math.round(n * s);
+
 const styles = StyleSheet.create({
   default: {
     fontSize: 16,
@@ -42,9 +51,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
+    position: "absolute",
+    width: px(320),
+    left: px(40),
+    textAlign: "center",
+    color: "#272BA0",
+    fontWeight: "500",
   },
   subtitle: {
     fontSize: 20,
@@ -54,5 +66,22 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     fontSize: 16,
     color: '#0a7ea4',
+  },
+  label: {
+    position: "absolute",
+    left: px(63),
+    fontSize: px(16),
+    fontWeight: "500",
+    color: "#2C2C2C",
+  },
+  guest: {
+    textAlign: "center",
+    fontSize: px(14),
+    fontWeight: "500",
+    color: "#000",
+    textDecorationLine: "underline",
+    textShadowColor: "rgba(0,0,0,0.25)",
+    textShadowOffset: { width: 0, height: px(4) },
+    textShadowRadius: px(4),
   },
 });
