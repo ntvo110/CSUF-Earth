@@ -1,4 +1,3 @@
-import { useThemeColor } from '@/hooks/use-theme-color';
 import { useMemo } from "react";
 import { StyleSheet, useWindowDimensions, View, type ViewProps } from 'react-native';
 
@@ -9,9 +8,8 @@ export type ThemedViewProps = ViewProps & {
 };
 
 export function ThemedView({ style, lightColor, darkColor, type = 'default', ...otherProps }: ThemedViewProps) {
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
-  return <View style={[{ backgroundColor }, 
+  return <View style={[{  }, 
     type === 'default' ? styles.default: undefined,
     type === 'glass' ? styles.glass : undefined,
     type === 'input' ? styles.input : undefined,
