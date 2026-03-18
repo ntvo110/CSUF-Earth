@@ -17,6 +17,7 @@ export default function Index() {
       <Ionicons name="location-sharp" size={80} color="#F59A2A" />
       <Text style={styles.title}>CSUF</Text>
     </View>
+
   );
 }
 
