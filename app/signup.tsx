@@ -1,5 +1,7 @@
 import CSUFButton from "@/components/CSUFButton";
 import { auth, db } from '@/components/firebaseConfig';
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -162,76 +164,40 @@ export default function Signup() {
             </View>
 
             {/* Title */}
-            <Text
+            <ThemedText type="title"
               style={{
-                position: "absolute",
-                width: px(320),
-                left: px(40),
                 top: px(220),
-                textAlign: "center",
-                color: "#272BA0",
                 fontSize: px(34),
-                fontWeight: "500",
               }}
             >
               create an account
-            </Text>
+            </ThemedText>
 
             {/* Glass card */}
-            <View
+            <ThemedView type="glass"
               style={{
-                position: "absolute",
-                width: px(320),
                 height: px(707),
-                left: px(40),
                 top: px(300),
-                borderRadius: px(34),
-                backgroundColor: "rgba(250,250,250,0.70)",
-                shadowColor: "#000",
-                shadowOpacity: 0.12,
-                shadowRadius: px(20),
-                shadowOffset: { width: px(10), height: px(12) },
-                elevation: 6,
               }}
             />
 
-            {error ? <Text
+            {error ? <ThemedText type="label"
               style={{
-                position: "absolute",
-                left: px(63),
                 top: px(315),
-                fontSize: px(16),
-                fontWeight: "500",
-                color: "#2C2C2C",
-              }}>{error}</Text> : null}
+              }}>{error}</ThemedText> : null}
 
             {/* First name */}
-            <Text
+            <ThemedText type="label"
               style={{
-                position: "absolute",
-                left: px(63),
                 top: px(345),
-                fontSize: px(16),
-                fontWeight: "500",
-                color: "#2C2C2C",
               }}
             >
               first name
-            </Text>
+            </ThemedText>
 
-            <View
+            <ThemedView type="input"
               style={{
-                position: "absolute",
-                width: px(272),
-                height: px(40),
-                left: px(62),
                 top: px(377),
-                backgroundColor: "#FFFFFF",
-                borderRadius: px(12),
-                borderWidth: 1,
-                borderColor: "#F2F2F2",
-                justifyContent: "center",
-                paddingHorizontal: px(12),
               }}
             >
               <TextInput
@@ -246,35 +212,20 @@ export default function Signup() {
                 }}
                 autoCapitalize='words'
               />
-            </View>
+            </ThemedView>
 
             {/* Last name */}
-            <Text
+            <ThemedText type="label"
               style={{
-                position: "absolute",
-                left: px(63),
                 top: px(442),
-                fontSize: px(16),
-                fontWeight: "500",
-                color: "#2C2C2C",
               }}
             >
               last name
-            </Text>
+            </ThemedText>
 
-            <View
+            <ThemedView type="input"
               style={{
-                position: "absolute",
-                width: px(272),
-                height: px(40),
-                left: px(62),
                 top: px(474),
-                backgroundColor: "#FFFFFF",
-                borderRadius: px(12),
-                borderWidth: 1,
-                borderColor: "#F2F2F2",
-                justifyContent: "center",
-                paddingHorizontal: px(12),
               }}
             >
               <TextInput
@@ -289,35 +240,20 @@ export default function Signup() {
                 }}
                 autoCapitalize='words'
               />
-            </View>
+            </ThemedView>
 
             {/* Email */}
-            <Text
+            <ThemedText type="label"
               style={{
-                position: "absolute",
-                left: px(63),
                 top: px(539),
-                fontSize: px(16),
-                fontWeight: "500",
-                color: "#2C2C2C",
               }}
             >
-              email address
-            </Text>
+              first name
+            </ThemedText>
 
-            <View
+            <ThemedView type="input"
               style={{
-                position: "absolute",
-                width: px(272),
-                height: px(40),
-                left: px(62),
                 top: px(571),
-                backgroundColor: "#FFFFFF",
-                borderRadius: px(12),
-                borderWidth: 1,
-                borderColor: "#F2F2F2",
-                justifyContent: "center",
-                paddingHorizontal: px(12),
               }}
             >
               <TextInput
@@ -333,35 +269,20 @@ export default function Signup() {
                   color: "#2C2C2C",
                 }}
               />
-            </View>
+            </ThemedView>
 
             {/* Password */}
-            <Text
+            <ThemedText type="label"
               style={{
-                position: "absolute",
-                left: px(63),
                 top: px(636),
-                fontSize: px(16),
-                fontWeight: "500",
-                color: "#2C2C2C",
               }}
             >
               password
-            </Text>
+            </ThemedText>
 
-            <View
+            <ThemedView type="input"
               style={{
-                position: "absolute",
-                width: px(272),
-                height: px(40),
-                left: px(62),
                 top: px(668),
-                backgroundColor: "#FFFFFF",
-                borderRadius: px(12),
-                borderWidth: 1,
-                borderColor: "#F2F2F2",
-                justifyContent: "center",
-                paddingHorizontal: px(12),
               }}
             >
               <TextInput
@@ -376,41 +297,26 @@ export default function Signup() {
                   color: "#2C2C2C",
                 }}
               />
-            </View>
+            </ThemedView>
 
-             {/* Password */}
-            <Text
+             {/* Confirm Password */}
+            <ThemedText type="label"
               style={{
-                position: "absolute",
-                left: px(63),
                 top: px(733),
-                fontSize: px(16),
-                fontWeight: "500",
-                color: "#2C2C2C",
               }}
             >
-              confirm password
-            </Text>
+              Confirm Password
+            </ThemedText>
 
-            <View
+            <ThemedView type="input"
               style={{
-                position: "absolute",
-                width: px(272),
-                height: px(40),
-                left: px(62),
                 top: px(765),
-                backgroundColor: "#FFFFFF",
-                borderRadius: px(12),
-                borderWidth: 1,
-                borderColor: "#F2F2F2",
-                justifyContent: "center",
-                paddingHorizontal: px(12),
               }}
             >
               <TextInput
                 value={form.confirmPassword}
                 onChangeText={(val) => updateField('confirmPassword', val)}
-                placeholder="confirm password"
+                placeholder="Confirm Password"
                 placeholderTextColor="#CFCFCF"
                 secureTextEntry
                 style={{
@@ -419,11 +325,11 @@ export default function Signup() {
                   color: "#2C2C2C",
                 }}
               />
-            </View>
+            </ThemedView>
 
             {/* Sign up button */}
             <CSUFButton
-              title="sign up"
+              title="Sign Up"
               onPress={handleCreateAccount}
               variant="figmaSmall"
               style={{
@@ -446,7 +352,7 @@ export default function Signup() {
               <Text
                 style={{ fontSize: px(14), fontWeight: "400", color: "#000" }}
               >
-                Already an account?
+                Already have an account?
               </Text>
               <Text>{"  "}</Text>
               <Text
@@ -468,20 +374,9 @@ export default function Signup() {
                 top: px(937),
               }}
             >
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: px(14),
-                  fontWeight: "500",
-                  color: "#000",
-                  textDecorationLine: "underline",
-                  textShadowColor: "rgba(0,0,0,0.25)",
-                  textShadowOffset: { width: 0, height: px(4) },
-                  textShadowRadius: px(4),
-                }}
-              >
+              <ThemedText type="guest">
                 continue as a guest
-              </Text>
+              </ThemedText>
             </TouchableOpacity>
           </View>
         </ScrollView>
