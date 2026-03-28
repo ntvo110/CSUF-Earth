@@ -1,8 +1,11 @@
+import BottomSheet, { BottomSheetFlatList, BottomSheetTextInput, BottomSheetView } from "@gorhom/bottom-sheet";
 import { BlurView } from "expo-blur";
+import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Location from "expo-location";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MapView, {
   Marker,
   Polygon,
@@ -10,6 +13,9 @@ import MapView, {
   PROVIDER_GOOGLE,
   Region,
 } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
+
+const MAPS_API_KEY = Constants.expoConfig?.extra?.apiKey;
 
 type Building = {
   id: string;
@@ -66,6 +72,8 @@ export default function Map() {
   const [userRegion, setUserRegion] = useState<Region | null>(null);
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
   const [isOutsideCampus, setIsOutsideCampus] = useState(false);
+  const [filter, setFilter] = useState<Building[]>(buildings);
+  const [searchQuery, setSearchQuery] = useState("");
 
   function isPointInPolygon(
     point: { latitude: number; longitude: number },
@@ -213,7 +221,34 @@ export default function Map() {
     mapRef.current?.animateToRegion(buildingRegion, 800);
   };
 
+  // adjust height of bottomsheet
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ["20%", "90%"], []);
+
+  const renderItem = useCallback(({ item }: { item: Building }) => (
+    <TouchableOpacity style={styles.courseContainer} onPress={() => setSelectedBuilding(item)}>
+      <Text style={styles.courseText}>{item.name}</Text>
+    </TouchableOpacity>
+  ), []);
+
+  const handleSearch = (text: string) => {
+    if(text) {
+      let filteredList = buildings.filter(b => 
+        b.name.toLowerCase().includes(text.toLowerCase()));
+
+      setFilter(filteredList);
+    } else{
+      setFilter(buildings);
+    }
+  };
+
+  const destination = selectedBuilding? {
+        latitude: selectedBuilding.latitude,
+        longitude: selectedBuilding.longitude
+      }: null;
+
   return (
+    <GestureHandlerRootView style={styles.container}>
     <View style={styles.container}>
       <MapView
         ref={mapRef}
@@ -258,6 +293,17 @@ export default function Map() {
             strokeWidth={5}
           />
         )}
+
+        {userRegion && destination && (
+          <MapViewDirections
+            origin={userRegion}
+            destination={destination}
+            apikey={MAPS_API_KEY}
+            strokeWidth={3}
+            strokeColor="hot pink"
+            mode="WALKING"
+          />
+        )}
       </MapView>
 
       <LinearGradient
@@ -291,20 +337,30 @@ export default function Map() {
         </View>
       </View>
 
-      <View style={styles.glassContainer}>
+      <BottomSheet ref={bottomSheetRef} index={0} snapPoints={snapPoints} handleIndicatorStyle={styles.handle}>
+      <BottomSheetView style={styles.container}>
         <BlurView intensity={60} tint="light" style={styles.blurLayer}>
-          <View style={styles.handle} />
 
-          <TouchableOpacity style={styles.searchButton}>
-            <Text style={styles.searchText}>
-              {selectedBuilding
-                ? `Route to ${selectedBuilding.name}`
-                : "Search Campus"}
-            </Text>
-          </TouchableOpacity>
+          <BottomSheetTextInput
+            style={styles.searchButton} 
+            placeholder="Search Campus"
+            onChangeText={(text) => {
+              setSearchQuery(text);
+              handleSearch(text);
+            }}
+          />
+
+          <BottomSheetFlatList<Building>
+            data={filter}
+            keyExtractor={(item: Building) => item.id} 
+            renderItem={renderItem}
+            contentContainerStyle={styles.listContent}
+          />
         </BlurView>
+      </BottomSheetView>
+      </BottomSheet>
       </View>
-    </View>
+    </GestureHandlerRootView>
   );
 }
 
@@ -406,10 +462,7 @@ const styles = StyleSheet.create({
   },
 
   glassContainer: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: 155,
+    flex: 1,
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
     overflow: "hidden",
@@ -418,7 +471,7 @@ const styles = StyleSheet.create({
   blurLayer: {
     flex: 1,
     paddingTop: 20,
-    alignItems: "center",
+    //alignItems: "center",
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
     backgroundColor: "rgba(250,250,250,0.7)",
@@ -438,7 +491,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#5797F7",
     borderRadius: 22,
     flexDirection: "row",
-    alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
   },
@@ -449,4 +502,33 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
   },
+
+  plusButton: {
+    position: "absolute",
+    width: 48,
+    height: 48,
+    top: 343,
+    bottom: 276,
+  },
+
+  courseText: {
+    color: "#000000",
+    fontSize: 20,
+    lineHeight: 22,
+    fontWeight: "600",
+    textAlign: "left",
+  },
+
+  courseContainer: {
+    width: "100%",
+    paddingHorizontal: 14,
+    paddingVertical: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+  },
+
+  listContent: {
+    paddingBottom: 24,
+  },
+
 });
