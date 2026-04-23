@@ -100,8 +100,8 @@ export default function Tutorial() {
             <View
               style={{
                 position: "absolute",
-                left: 0,
-                right: 0,
+                left: px(32),
+                right: px(32),
                 top: py(500),
                 alignItems: "center",
               }}

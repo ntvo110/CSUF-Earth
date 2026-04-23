@@ -52,6 +52,17 @@ export default function Welcome() {
     new Animated.Value(shouldAnimate ? LOGIN.top : WELCOME.top)
   ).current;
 
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, { toValue: 0.3, duration: 900, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1, duration: 900, useNativeDriver: true }),
+      ])
+    ).start();
+  }, []);
+
   const blobH = useRef(
     new Animated.Value(shouldAnimate ? LOGIN.h : WELCOME.h)
   ).current;
@@ -202,16 +213,17 @@ export default function Welcome() {
               Find your classes easily and navigate your way through campus.
             </Text>
 
-            <Text
+            <Animated.Text
               style={{
                 marginTop: px(26),
-                color: "rgba(39,43,160,0.35)",
+                color: "#ffffff",
                 fontSize: px(13),
                 fontWeight: "500",
+                opacity: pulseAnim,
               }}
             >
               tap anywhere to continue
-            </Text>
+            </Animated.Text>
           </Animated.View>
         </View>
       </Pressable>

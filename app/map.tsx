@@ -2,12 +2,12 @@ import BottomSheet, { BottomSheetFlatList, BottomSheetTextInput } from "@gorhom/
 import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Location from "expo-location";
+import { router } from "expo-router";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MapView, {
   Marker,
-  Polygon,
   Polyline,
   PROVIDER_GOOGLE,
   Region,
@@ -56,6 +56,7 @@ type Classroom = {
   categories?: string[];
   layouts?: string[];
 };
+
 
 export default function Map() {
   const mapRef = useRef<MapView | null>(null);
@@ -261,8 +262,8 @@ export default function Map() {
   const zoomIn = () => {
     const newRegion: Region = {
       ...mapRegion,
-      latitudeDelta: Math.max(mapRegion.latitudeDelta / 2, 0.001),
-      longitudeDelta: Math.max(mapRegion.longitudeDelta / 2, 0.001),
+      latitudeDelta: Math.max(mapRegion.latitudeDelta / 2, 0.0001),
+      longitudeDelta: Math.max(mapRegion.longitudeDelta / 2, 0.0001),
     };
 
     setMapRegion(newRegion);
@@ -296,15 +297,15 @@ export default function Map() {
     const buildingRegion: Region = {
       latitude: building.latitude,
       longitude: building.longitude,
-      latitudeDelta: 0.003,
-      longitudeDelta: 0.003,
+      latitudeDelta: 0.0005,
+      longitudeDelta: 0.0005,
     };
 
     setMapRegion(buildingRegion);
     mapRef.current?.animateToRegion(buildingRegion, 800);
 
     // snap sheet to full height so user can see the room list
-    bottomSheetRef.current?.snapToIndex(2);
+    bottomSheetRef.current?.snapToIndex(0);
   };
 
   // bottom sheet with 3 snap points: peeking, half, full
@@ -421,15 +422,20 @@ export default function Map() {
         style={StyleSheet.absoluteFillObject}
         initialRegion={campusRegion}
         showsUserLocation={true}
-        onRegionChangeComplete={(region) => setMapRegion(region)}
+        minZoomLevel={10}
+        maxZoomLevel={21}
+        onRegionChangeComplete={(region) => {
+          const clampedLat = Math.min(33.8850, Math.max(33.8771, region.latitude));
+          const clampedLng = Math.min(-117.8817, Math.max(-117.8903, region.longitude));
+          if (clampedLat !== region.latitude || clampedLng !== region.longitude) {
+            const snapped = { ...region, latitude: clampedLat, longitude: clampedLng };
+            mapRef.current?.animateToRegion(snapped, 300);
+            setMapRegion(snapped);
+          } else {
+            setMapRegion(region);
+          }
+        }}
       >
-        {/* blue tinted polygon showing campus boundary */}
-        <Polygon
-          coordinates={campusBoundary}
-          strokeColor="#335991"
-          fillColor="rgba(87,151,247,0.10)"
-          strokeWidth={2}
-        />
 
         {/* drop a marker for each building */}
         {buildings.map((building) => (
@@ -475,6 +481,7 @@ export default function Map() {
             mode="WALKING"
           />
         )}
+
       </MapView>
 
       {/* blue gradient overlay at the top */}
@@ -510,6 +517,12 @@ export default function Map() {
           </TouchableOpacity>
         </View>
       </View>
+
+      {selectedBuilding?.id === "cs" && (
+        <TouchableOpacity style={styles.floorLayoutButton} onPress={() => router.push("/floorplan")}>
+          <Text style={styles.floorLayoutButtonText}>View Floor Layout</Text>
+        </TouchableOpacity>
+      )}
 
       {/* bottom sheet, cant pan it down so list scroll doesnt conflict */}
       <BottomSheet
@@ -618,9 +631,9 @@ const styles = StyleSheet.create({
 
   mapControls: {
     position: "absolute",
-    top: 120,
+    top: 60,
     right: 20,
-    alignItems: "center",
+    alignItems: "flex-end",
   },
 
   locationPill: {
@@ -628,33 +641,33 @@ const styles = StyleSheet.create({
     height: 48,
     paddingHorizontal: 18,
     borderRadius: 24,
-    backgroundColor: "rgba(255,255,255,0.94)",
+    backgroundColor: "rgba(255,255,255,0.80)",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 16,
     shadowColor: "#000",
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 3 },
-    elevation: 4,
+    shadowOpacity: 0.28,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 10,
   },
 
   locationPillText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#335991",
+    color: "#272BA0",
   },
 
   zoomRow: {
     flexDirection: "row",
     overflow: "hidden",
     borderRadius: 28,
-    backgroundColor: "rgba(255,255,255,0.92)",
+    backgroundColor: "rgba(255,255,255,0.80)",
     shadowColor: "#000",
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 3 },
-    elevation: 4,
+    shadowOpacity: 0.28,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 10,
   },
 
   zoomLeft: {
@@ -676,7 +689,7 @@ const styles = StyleSheet.create({
   zoomText: {
     fontSize: 28,
     fontWeight: "700",
-    color: "#335991",
+    color: "#272BA0",
     lineHeight: 30,
   },
 
@@ -819,4 +832,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   tagText: { color: "#335991", fontSize: 13 },
+
+  floorLayoutButton: {
+    position: "absolute",
+    bottom: "22%",
+    alignSelf: "center",
+    backgroundColor: "#272BA0",
+    paddingHorizontal: 28,
+    paddingVertical: 14,
+    borderRadius: 28,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+  },
+  floorLayoutButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+
+
 });
