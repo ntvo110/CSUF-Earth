@@ -135,7 +135,7 @@ export default function Login() {
           <ThemedText type="title"
             style={{
               height: px(66),
-              top: px(293),
+              top: px(105),
               fontSize: px(48),
             }}
           >

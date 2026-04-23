@@ -248,7 +248,7 @@ export default function Signup() {
                 top: px(539),
               }}
             >
-              first name
+              email address
             </ThemedText>
 
             <ThemedView type="input"
