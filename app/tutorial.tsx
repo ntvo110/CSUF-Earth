@@ -3,6 +3,7 @@ import { router } from "expo-router";
 import React, { useMemo, useRef, useState } from "react";
 import {
   FlatList,
+  Image,
   NativeScrollEvent,
   NativeSyntheticEvent,
   Pressable,
@@ -19,12 +20,13 @@ import PaginationDots from "../components/PaginationDots"; // <- adjust path if 
 type Slide = {
   title: string;
   subtitle?: string;
+  image?: any;
 };
 
 const SLIDES: Slide[] = [
-  { title: "to begin..", subtitle: "Find your classrooms quickly with indoor navigation." },
-  { title: "placeholder", subtitle: "discover campus features and stay\nconnected" },
-  { title: "placeholder", subtitle: "you're all set! let's explore campus\ntogether" },
+  { title: "to begin..", subtitle: "Find your classrooms quickly with indoor navigation.", image: require("../assets/images/clipboard_checklist.webp") },
+  { title: "", subtitle: "discover campus features and stay\nconnected", image: require("../assets/images/building_3D.png") },
+  { title: "", subtitle: "you're all set! let's explore campus\ntogether", image: require("../assets/images/Tuffy_Walking.png") },
 ];
 
 export default function Tutorial() {
@@ -96,26 +98,49 @@ export default function Tutorial() {
         contentContainerStyle={{}}
         renderItem={({ item }) => (
           <View style={{ width, height }}>
-            {/* Title block positioned to match Figma (y ~ 527) */}
+            {/* Image — fills from top down to just above subtitle */}
+            {!!item.image && (
+              <View
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  top: py(300),
+                  bottom: py(300),
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Image
+                  source={item.image}
+                  style={{ width: "150%", height: "120%" }}
+                  resizeMode="contain"
+                />
+              </View>
+            )}
+
+            {/* Title block */}
             <View
               style={{
                 position: "absolute",
                 left: px(32),
                 right: px(32),
-                top: py(500),
+                top: py(570),
                 alignItems: "center",
               }}
             >
-              <Text
-                style={{
-                  textAlign: "center",
-                  color: "#272BA0",
-                  fontSize: px(32),
-                  fontWeight: "500",
-                }}
-              >
-                {item.title}
-              </Text>
+              {!!item.title && (
+                <Text
+                  style={{
+                    textAlign: "center",
+                    color: "#272BA0",
+                    fontSize: px(32),
+                    fontWeight: "500",
+                  }}
+                >
+                  {item.title}
+                </Text>
+              )}
 
               {!!item.subtitle && (
                 <Text

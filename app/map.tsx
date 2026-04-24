@@ -1,10 +1,11 @@
-import BottomSheet, { BottomSheetFlatList, BottomSheetTextInput } from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetBackgroundProps, BottomSheetFlatList, BottomSheetScrollView, BottomSheetTextInput } from "@gorhom/bottom-sheet";
+import { BlurView } from "expo-blur";
 import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MapView, {
   Marker,
@@ -56,6 +57,20 @@ type Classroom = {
   categories?: string[];
   layouts?: string[];
 };
+
+type ScheduleEntry = {
+  id: string;
+  classroomId: string;
+  classroomName: string;
+  roomNumber: string;
+  building: string;
+  customName: string;
+  days: string[];
+  startTime: string;
+  endTime: string;
+};
+
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
 
 export default function Map() {
@@ -119,6 +134,98 @@ export default function Map() {
   const [allClassrooms, setAllClassrooms] = useState<Classroom[]>([]);
   const [filteredClassrooms, setFilteredClassrooms] = useState<Classroom[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState<"classes" | "buildings" | "schedule">("classes");
+  const [recentBuildings, setRecentBuildings] = useState<Building[]>([]);
+  const [favoriteClassrooms, setFavoriteClassrooms] = useState<Set<string>>(new Set());
+  const [favoriteBuildings, setFavoriteBuildings] = useState<Set<string>>(new Set());
+  const [scheduleEntries, setScheduleEntries] = useState<ScheduleEntry[]>([]);
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const [schedulingRoom, setSchedulingRoom] = useState<Classroom | null>(null);
+  const [scheduleForm, setScheduleForm] = useState({ customName: "", days: [] as string[], startTime: "", endTime: "" });
+  const [showActionMenu, setShowActionMenu] = useState(false);
+  const [actionMenuRoom, setActionMenuRoom] = useState<Classroom | null>(null);
+
+  const toggleFavoriteClassroom = (id: string) => {
+    setFavoriteClassrooms(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleFavoriteBuilding = (id: string) => {
+    setFavoriteBuildings(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  const openActionMenu = (room: Classroom) => {
+    setActionMenuRoom(room);
+    setShowActionMenu(true);
+  };
+
+  const openScheduleModal = (room: Classroom) => {
+    setSchedulingRoom(room);
+    setScheduleForm({ customName: room.name, days: [], startTime: "", endTime: "" });
+    setShowScheduleModal(true);
+  };
+
+  const saveScheduleEntry = () => {
+    if (!schedulingRoom) return;
+    const entry: ScheduleEntry = {
+      id: `${schedulingRoom.id}-${Date.now()}`,
+      classroomId: schedulingRoom.id,
+      classroomName: schedulingRoom.name,
+      roomNumber: schedulingRoom.roomNumber,
+      building: schedulingRoom.building,
+      customName: scheduleForm.customName || schedulingRoom.name,
+      days: scheduleForm.days,
+      startTime: scheduleForm.startTime,
+      endTime: scheduleForm.endTime,
+    };
+    setScheduleEntries(prev => [...prev, entry]);
+    setShowScheduleModal(false);
+    setSchedulingRoom(null);
+    setScheduleForm({ customName: "", days: [], startTime: "", endTime: "" });
+  };
+
+  const renderScheduleView = () => (
+    <BottomSheetScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+      {scheduleEntries.length === 0 ? (
+        <View style={styles.emptySchedule}>
+          <Text style={styles.emptyScheduleTitle}>No classes scheduled</Text>
+          <Text style={styles.emptyScheduleText}>
+            Tap "Add" on any classroom, then choose "Add to Schedule".
+          </Text>
+        </View>
+      ) : (
+        scheduleEntries.map(entry => (
+          <View key={entry.id} style={styles.scheduleEntry}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.scheduleEntryName}>{entry.customName}</Text>
+              <Text style={styles.scheduleEntryRoom}>Room {entry.roomNumber} · {entry.building}</Text>
+              {entry.days.length > 0 && (
+                <Text style={styles.scheduleEntryMeta}>{entry.days.join("  ·  ")}</Text>
+              )}
+              {entry.startTime ? (
+                <Text style={styles.scheduleEntryMeta}>
+                  {entry.startTime}{entry.endTime ? `  –  ${entry.endTime}` : ""}
+                </Text>
+              ) : null}
+            </View>
+            <TouchableOpacity
+              style={styles.scheduleEntryRemove}
+              onPress={() => setScheduleEntries(prev => prev.filter(e => e.id !== entry.id))}
+            >
+              <Text style={styles.scheduleEntryRemoveText}>✕</Text>
+            </TouchableOpacity>
+          </View>
+        ))
+      )}
+    </BottomSheetScrollView>
+  );
 
   // fetch all classrooms from firestore on load
   useEffect(() => {
@@ -287,6 +394,7 @@ export default function Map() {
     setSelectedBuilding(building);
     setSelectedClassroom(null);
     setSearchQuery("");
+    setRecentBuildings(prev => [building, ...prev.filter(b => b.id !== building.id)].slice(0, 3));
 
     // filter to only show rooms in this building
     const rooms = allClassrooms.filter(c =>
@@ -356,27 +464,119 @@ export default function Map() {
     }
   };
 
-  // full detail view shown when user taps a classroom
+  const renderBuildingDetail = () => {
+    if (!selectedBuilding) return null;
+    const isFav = favoriteBuildings.has(selectedBuilding.id);
+    return (
+      <BottomSheetScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+        <View style={styles.bdHeader}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.bdTitle}>{selectedBuilding.name}</Text>
+            <Text style={styles.bdSubtitle}>Building</Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => { setSelectedBuilding(null); setFilteredClassrooms(allClassrooms); setSearchQuery(""); }}
+            style={styles.closeBtn}
+          >
+            <Text style={styles.closeBtnText}>✕</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.actionRow}>
+          <TouchableOpacity style={styles.navButton} onPress={centerOnUser}>
+            <Image source={require("@/assets/images/walking_icon.png")} style={styles.navIcon} />
+            <Text style={styles.navButtonText}>start navigation</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.addBuildingBtn, isFav && styles.addBtnActive]}
+            onPress={() => toggleFavoriteBuilding(selectedBuilding.id)}
+          >
+            <Text style={styles.addBuildingDots}>•••</Text>
+            <Text style={[styles.addBuildingText, isFav && styles.addBtnTextActive]}>
+              {isFav ? "Added" : "Add"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {selectedBuilding.id === "cs" && (
+          <Image source={require("@/assets/images/CSBuilding_Photo.png")} style={styles.buildingPhoto} />
+        )}
+
+        <Text style={styles.bdSectionHeading}>About</Text>
+        <View style={styles.aboutCard}>
+          <Text style={styles.aboutText}>
+            The {selectedBuilding.name} houses classrooms, computer labs, and faculty offices for students and staff at California State University, Fullerton.
+          </Text>
+        </View>
+
+        <Text style={styles.bdSectionHeading}>Classrooms</Text>
+
+        <View style={styles.classroomSearchBar}>
+          <Image source={require("@/assets/images/search_icon.png")} style={styles.searchIconImg} />
+          <BottomSheetTextInput
+            style={styles.searchInput}
+            placeholder="Search Classroom"
+            placeholderTextColor="#9CA3AF"
+            value={searchQuery}
+            onChangeText={(text) => { setSearchQuery(text); handleSearch(text); }}
+          />
+        </View>
+
+        {filteredClassrooms.map(room => (
+          <View key={room.id} style={styles.roomRow}>
+            <TouchableOpacity style={{ flex: 1 }} onPress={() => setSelectedClassroom(room)}>
+              <Text style={styles.roomRowName}>Room {room.roomNumber} — {room.name}</Text>
+              <Text style={styles.roomRowSub}>{room.building} · {room.roomType || "Lecture"}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.roomAddBtn}
+              onPress={() => openActionMenu(room)}
+            >
+              <Text style={styles.roomAddBtnText}>Add</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </BottomSheetScrollView>
+    );
+  };
+
   const renderClassroomDetail = () => {
     if (!selectedClassroom) return null;
+    const isFav = favoriteClassrooms.has(selectedClassroom.id);
     return (
-      <ScrollView style={styles.detailContainer} contentContainerStyle={{ paddingBottom: 40 }}>
-        {/* back button goes back to the room list */}
-        <TouchableOpacity onPress={() => setSelectedClassroom(null)} style={styles.backButton}>
-          <Text style={styles.backButtonText}>← Back</Text>
-        </TouchableOpacity>
+      <BottomSheetScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 40 }}>
+        <View style={styles.bdHeader}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.bdTitle}>{selectedClassroom.name}</Text>
+            <Text style={styles.bdSubtitle}>Classroom</Text>
+          </View>
+          <TouchableOpacity onPress={() => setSelectedClassroom(null)} style={styles.closeBtn}>
+            <Text style={styles.closeBtnText}>✕</Text>
+          </TouchableOpacity>
+        </View>
 
-        <Text style={styles.detailTitle}>Room {selectedClassroom.roomNumber}</Text>
-        <Text style={styles.detailSubtitle}>{selectedClassroom.formalName}</Text>
+        <View style={styles.actionRow}>
+          <TouchableOpacity style={styles.navButton}>
+            <Image source={require("@/assets/images/walking_icon.png")} style={styles.navIcon} />
+            <Text style={styles.navButtonText}>start navigation</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.addBuildingBtn, isFav && styles.addBtnActive]}
+            onPress={() => openActionMenu(selectedClassroom)}
+          >
+            <Text style={[styles.addBuildingText, isFav && styles.addBtnTextActive]}>
+              {isFav ? "✓ Added" : "Add"}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-        {/* main info card */}
+        <Text style={styles.bdSectionHeading}>About</Text>
         <View style={styles.detailCard}>
-          <DetailRow label="Building" value={`${selectedClassroom.building} (${selectedClassroom.buildingCode})`} />
+          <DetailRow label="Building" value={selectedClassroom.building} />
           <DetailRow label="Room Type" value={selectedClassroom.roomType || "—"} />
           <DetailRow label="Capacity" value={String(selectedClassroom.maxCapacity || selectedClassroom.defaultCapacity || "—")} />
         </View>
 
-        {/* Array.isArray prevents crash if field is missing in firestore */}
         {Array.isArray(selectedClassroom.features) && selectedClassroom.features.length > 0 && (
           <>
             <Text style={styles.sectionLabel}>Features</Text>
@@ -385,7 +585,6 @@ export default function Map() {
             </View>
           </>
         )}
-
         {Array.isArray(selectedClassroom.categories) && selectedClassroom.categories.length > 0 && (
           <>
             <Text style={styles.sectionLabel}>Categories</Text>
@@ -394,7 +593,6 @@ export default function Map() {
             </View>
           </>
         )}
-
         {Array.isArray(selectedClassroom.layouts) && selectedClassroom.layouts.length > 0 && (
           <>
             <Text style={styles.sectionLabel}>Layouts</Text>
@@ -403,7 +601,7 @@ export default function Map() {
             </View>
           </>
         )}
-      </ScrollView>
+      </BottomSheetScrollView>
     );
   };
 
@@ -524,47 +722,127 @@ export default function Map() {
         </TouchableOpacity>
       )}
 
-      {/* bottom sheet, cant pan it down so list scroll doesnt conflict */}
+      {/* bottom sheet with glass background */}
       <BottomSheet
         ref={bottomSheetRef}
         index={0}
         snapPoints={snapPoints}
         handleIndicatorStyle={styles.handle}
         enablePanDownToClose={false}
+        backgroundComponent={({ style }: BottomSheetBackgroundProps) => (
+          <BlurView
+            intensity={70}
+            tint="light"
+            style={[style, { borderTopLeftRadius: 34, borderTopRightRadius: 34, overflow: "hidden" }]}
+          />
+        )}
       >
         <View style={styles.container}>
           <View style={styles.sheetContent}>
 
-            {/* show detail view or room list depending on selection */}
             {selectedClassroom ? (
               renderClassroomDetail()
+            ) : selectedBuilding ? (
+              renderBuildingDetail()
             ) : (
               <>
-                {/* building header with back button */}
-                {selectedBuilding && (
-                  <View style={styles.buildingHeader}>
-                    <TouchableOpacity onPress={() => {
-                      setSelectedBuilding(null);
-                      setFilteredClassrooms(allClassrooms);
-                      setSearchQuery("");
-                    }}>
-                      <Text style={styles.backButtonText}>← All Buildings</Text>
+                {/* glass search bar */}
+                <View style={styles.searchContainer}>
+                  <Image
+                    source={require("@/assets/images/search_icon.png")}
+                    style={styles.searchIconImg}
+                  />
+                  <BottomSheetTextInput
+                    style={styles.searchInput}
+                    placeholder="Search Campus"
+                    placeholderTextColor="#9CA3AF"
+                    value={searchQuery}
+                    onChangeText={(text) => {
+                      setSearchQuery(text);
+                      handleSearch(text);
+                    }}
+                  />
+                </View>
+
+                {/* filter tabs — only show when not drilled into a building */}
+                {!selectedBuilding && (
+                  <View style={styles.filterRow}>
+                    <TouchableOpacity
+                      style={[styles.filterTab, activeFilter === "classes" && styles.filterTabActive]}
+                      onPress={() => setActiveFilter("classes")}
+                    >
+                      <Text style={[styles.filterTabText, activeFilter === "classes" && styles.filterTabTextActive]}>Classes</Text>
                     </TouchableOpacity>
-                    <Text style={styles.buildingHeaderText}>{selectedBuilding.name}</Text>
+                    <TouchableOpacity
+                      style={[styles.filterTab, activeFilter === "buildings" && styles.filterTabActive]}
+                      onPress={() => setActiveFilter("buildings")}
+                    >
+                      <Text style={[styles.filterTabText, activeFilter === "buildings" && styles.filterTabTextActive]}>Building</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.filterTab, activeFilter === "schedule" && styles.filterTabActive]}
+                      onPress={() => setActiveFilter("schedule")}
+                    >
+                      <Text style={[styles.filterTabText, activeFilter === "schedule" && styles.filterTabTextActive]}>Schedule</Text>
+                    </TouchableOpacity>
                   </View>
                 )}
 
-                <BottomSheetTextInput
-                  style={styles.searchButton}
-                  placeholder={selectedBuilding ? `Search ${selectedBuilding.name}...` : "Search Campus"}
-                  value={searchQuery}
-                  onChangeText={(text) => {
-                    setSearchQuery(text);
-                    handleSearch(text);
-                  }}
-                />
+                {activeFilter === "schedule" ? (
+                  renderScheduleView()
+                ) : activeFilter === "buildings" ? (
+                  /* building list — all by default, filtered when searching */
+                  <BottomSheetFlatList
+                    data={searchQuery ? filter : buildings}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity style={styles.recentItem} onPress={() => handleBuildingPress(item)}>
+                        <Image source={require("@/assets/images/building_icon.png")} style={styles.buildingListIcon} />
+                        <View>
+                          <Text style={styles.recentItemName}>{item.name}</Text>
+                          <Text style={styles.recentItemSub}>building · {item.code}</Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    contentContainerStyle={styles.listContent}
+                  />
+                ) : !searchQuery ? (
+                  <BottomSheetScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+                    <Text style={styles.sectionHeader}>Favorites</Text>
+                    {favoriteClassrooms.size === 0 ? (
+                      <Text style={styles.emptyStateText}>No favorites yet</Text>
+                    ) : (
+                      allClassrooms
+                        .filter(c => favoriteClassrooms.has(c.id))
+                        .map(c => (
+                          <TouchableOpacity key={c.id} style={styles.recentItem} onPress={() => setSelectedClassroom(c)}>
+                            <View style={{ flex: 1 }}>
+                              <Text style={styles.recentItemName}>{c.name}</Text>
+                              <Text style={styles.recentItemSub}>{c.building} · {c.roomType || "Classroom"}</Text>
+                            </View>
+                            <TouchableOpacity style={styles.roomAddBtn} onPress={() => openActionMenu(c)}>
+                              <Text style={styles.roomAddBtnText}>•••</Text>
+                            </TouchableOpacity>
+                          </TouchableOpacity>
+                        ))
+                    )}
 
-                {loading ? (
+                    <Text style={styles.sectionHeader}>Recent</Text>
+                    {recentBuildings.length === 0 ? (
+                      <Text style={styles.emptyStateText}>No recent searches</Text>
+                    ) : (
+                      recentBuildings.map(b => (
+                        <TouchableOpacity key={b.id} style={styles.recentItem} onPress={() => handleBuildingPress(b)}>
+                          <Image source={require("@/assets/images/building_icon.png")} style={styles.buildingListIcon} />
+                          <View>
+                            <Text style={styles.recentItemName}>{b.name}</Text>
+                            <Text style={styles.recentItemSub}>building</Text>
+                          </View>
+                        </TouchableOpacity>
+                      ))
+                    )}
+                  </BottomSheetScrollView>
+                ) : loading ? (
                   <Text style={styles.loadingText}>Loading classrooms...</Text>
                 ) : filteredClassrooms.length === 0 ? (
                   <Text style={styles.loadingText}>No classrooms found.</Text>
@@ -584,6 +862,129 @@ export default function Map() {
         </View>
       </BottomSheet>
       </View>
+
+      {/* ── Action menu: Favorite or Schedule ── */}
+      <Modal transparent animationType="fade" visible={showActionMenu} onRequestClose={() => setShowActionMenu(false)}>
+        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={() => setShowActionMenu(false)}>
+          <BlurView intensity={30} tint="dark" style={StyleSheet.absoluteFillObject} />
+          <View style={styles.menuCard}>
+            {actionMenuRoom && (
+              <Text style={styles.menuRoomLabel}>{actionMenuRoom.name}</Text>
+            )}
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={() => {
+                if (actionMenuRoom) toggleFavoriteClassroom(actionMenuRoom.id);
+                setShowActionMenu(false);
+              }}
+            >
+              <Text style={styles.menuItemText}>
+                {actionMenuRoom && favoriteClassrooms.has(actionMenuRoom.id)
+                  ? "Remove from Favorites"
+                  : "Add to Favorites"}
+              </Text>
+            </TouchableOpacity>
+            <View style={styles.menuDivider} />
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={() => {
+                setShowActionMenu(false);
+                if (actionMenuRoom) openScheduleModal(actionMenuRoom);
+              }}
+            >
+              <Text style={styles.menuItemText}>Add to Schedule</Text>
+            </TouchableOpacity>
+            <View style={styles.menuDivider} />
+            <TouchableOpacity style={styles.menuItem} onPress={() => setShowActionMenu(false)}>
+              <Text style={[styles.menuItemText, { color: "#8E8E93" }]}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      {/* ── Schedule form modal ── */}
+      <Modal transparent animationType="slide" visible={showScheduleModal} onRequestClose={() => setShowScheduleModal(false)}>
+        <KeyboardAvoidingView style={styles.modalOuter} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+          <TouchableOpacity style={StyleSheet.absoluteFillObject} activeOpacity={1} onPress={() => setShowScheduleModal(false)}>
+            <BlurView intensity={30} tint="dark" style={StyleSheet.absoluteFillObject} />
+          </TouchableOpacity>
+          <View style={styles.scheduleFormCard}>
+            <View style={styles.modalHandle} />
+            <Text style={styles.modalTitle}>Add to Schedule</Text>
+            {schedulingRoom && (
+              <Text style={styles.modalSubtitle}>{schedulingRoom.name} · Room {schedulingRoom.roomNumber}</Text>
+            )}
+
+            <Text style={styles.modalLabel}>Class Name</Text>
+            <View style={styles.modalInputBox}>
+              <TextInput
+                value={scheduleForm.customName}
+                onChangeText={t => setScheduleForm(f => ({ ...f, customName: t }))}
+                placeholder="e.g. CPSC 131"
+                placeholderTextColor="#9CA3AF"
+                style={styles.modalInputText}
+              />
+            </View>
+
+            <Text style={styles.modalLabel}>Days</Text>
+            <View style={styles.dayRow}>
+              {DAYS.map(day => {
+                const active = scheduleForm.days.includes(day);
+                return (
+                  <TouchableOpacity
+                    key={day}
+                    style={[styles.dayBtn, active && styles.dayBtnActive]}
+                    onPress={() => setScheduleForm(f => ({
+                      ...f,
+                      days: active ? f.days.filter(d => d !== day) : [...f.days, day],
+                    }))}
+                  >
+                    <Text style={[styles.dayBtnText, active && styles.dayBtnTextActive]}>{day}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+
+            <View style={styles.timeRow}>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.modalLabel}>Start Time</Text>
+                <View style={styles.modalInputBox}>
+                  <TextInput
+                    value={scheduleForm.startTime}
+                    onChangeText={t => setScheduleForm(f => ({ ...f, startTime: t }))}
+                    placeholder="9:00 AM"
+                    placeholderTextColor="#9CA3AF"
+                    style={styles.modalInputText}
+                  />
+                </View>
+              </View>
+              <View style={{ width: 12 }} />
+              <View style={{ flex: 1 }}>
+                <Text style={styles.modalLabel}>End Time</Text>
+                <View style={styles.modalInputBox}>
+                  <TextInput
+                    value={scheduleForm.endTime}
+                    onChangeText={t => setScheduleForm(f => ({ ...f, endTime: t }))}
+                    placeholder="10:15 AM"
+                    placeholderTextColor="#9CA3AF"
+                    style={styles.modalInputText}
+                  />
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.modalActions}>
+              <TouchableOpacity style={styles.modalCancelBtn} onPress={() => setShowScheduleModal(false)}>
+                <Text style={styles.modalCancelText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.modalSaveBtn} onPress={saveScheduleEntry}>
+                <Text style={styles.modalSaveText}>Save</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </Modal>
+
     </GestureHandlerRootView>
   );
 }
@@ -705,7 +1106,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
-    backgroundColor: "rgba(250,250,250,0.97)",
+    backgroundColor: "transparent",
   },
 
   handle: {
@@ -716,25 +1117,113 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
 
-  searchButton: {
-    width: 336,
-    height: 48,
-    backgroundColor: "#5797F7",
-    borderRadius: 22,
+  searchContainer: {
     flexDirection: "row",
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingHorizontal: 12,
-    color: "#fff",
+    alignItems: "center",
+    marginHorizontal: 20,
+    height: 48,
+    backgroundColor: "rgba(255,255,255,0.75)",
+    borderRadius: 24,
+    paddingHorizontal: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "rgba(87,151,247,0.18)",
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+  },
+
+  searchIconImg: {
+    width: 18,
+    height: 18,
+    resizeMode: "contain",
+    marginRight: 10,
+    opacity: 0.55,
+    tintColor: "#5797F7",
+  },
+
+  searchInput: {
+    flex: 1,
     fontSize: 16,
+    color: "#2C2C2C",
+    height: "100%",
+  },
+
+  filterRow: {
+    flexDirection: "row",
+    marginHorizontal: 20,
+    marginBottom: 16,
+    gap: 10,
+  },
+
+  filterTab: {
+    paddingHorizontal: 22,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.70)",
+    borderWidth: 1,
+    borderColor: "rgba(87,151,247,0.25)",
+  },
+
+  filterTabActive: {
+    backgroundColor: "#5797F7",
+    borderColor: "#5797F7",
+  },
+
+  filterTabText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#5797F7",
+  },
+
+  filterTabTextActive: {
+    color: "#fff",
+  },
+
+  sectionHeader: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1C1C1E",
+    marginHorizontal: 20,
+    marginTop: 12,
+    marginBottom: 6,
+  },
+
+  emptyStateText: {
+    fontSize: 14,
+    color: "#9CA3AF",
+    marginHorizontal: 20,
     marginBottom: 8,
   },
 
-  searchText: {
-    color: "#FFFFFF",
-    fontSize: 18,
+  recentItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0,0,0,0.06)",
+  },
+
+  buildingListIcon: {
+    width: 36,
+    height: 36,
+    resizeMode: "contain",
+    marginRight: 12,
+    tintColor: "#335991",
+  },
+
+  recentItemName: {
+    fontSize: 16,
     fontWeight: "600",
-    textAlign: "center",
+    color: "#1C1C1E",
+  },
+
+  recentItemSub: {
+    fontSize: 13,
+    color: "#8E8E93",
+    marginTop: 2,
   },
 
   plusButton: {
@@ -832,6 +1321,416 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   tagText: { color: "#335991", fontSize: 13 },
+
+  bdHeader: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    paddingHorizontal: 20,
+    paddingTop: 4,
+    paddingBottom: 12,
+  },
+
+  bdTitle: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#1C1C1E",
+  },
+
+  bdSubtitle: {
+    fontSize: 14,
+    color: "#8E8E93",
+    marginTop: 2,
+  },
+
+  closeBtn: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "rgba(120,120,128,0.18)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 4,
+  },
+
+  closeBtnText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#3C3C43",
+  },
+
+  actionRow: {
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    gap: 12,
+    marginBottom: 16,
+  },
+
+  navButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#5797F7",
+    borderRadius: 14,
+    paddingVertical: 13,
+    gap: 8,
+  },
+
+  navIcon: {
+    width: 18,
+    height: 18,
+    resizeMode: "contain",
+    tintColor: "#fff",
+  },
+
+  navButtonText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#fff",
+  },
+
+  addBuildingBtn: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(255,255,255,0.85)",
+    borderRadius: 14,
+    paddingVertical: 13,
+    gap: 6,
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.08)",
+  },
+
+  addBtnActive: {
+    backgroundColor: "#5797F7",
+    borderColor: "#5797F7",
+  },
+
+  addBuildingDots: {
+    fontSize: 13,
+    color: "#1C1C1E",
+    letterSpacing: 1,
+  },
+
+  addBuildingText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#1C1C1E",
+  },
+
+  addBtnTextActive: {
+    color: "#fff",
+  },
+
+  buildingPhoto: {
+    width: "100%",
+    height: 180,
+    resizeMode: "cover",
+    borderRadius: 16,
+    marginHorizontal: 0,
+    marginBottom: 16,
+    alignSelf: "stretch",
+  },
+
+  bdSectionHeading: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#1C1C1E",
+    paddingHorizontal: 20,
+    marginBottom: 10,
+    marginTop: 4,
+  },
+
+  aboutCard: {
+    marginHorizontal: 20,
+    backgroundColor: "rgba(255,255,255,0.75)",
+    borderRadius: 14,
+    padding: 14,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.06)",
+  },
+
+  aboutText: {
+    fontSize: 14,
+    lineHeight: 21,
+    color: "#3C3C43",
+  },
+
+  classroomSearchBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 20,
+    height: 44,
+    backgroundColor: "rgba(118,118,128,0.12)",
+    borderRadius: 22,
+    paddingHorizontal: 14,
+    marginBottom: 8,
+  },
+
+  roomRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0,0,0,0.06)",
+  },
+
+  roomRowName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#1C1C1E",
+  },
+
+  roomRowSub: {
+    fontSize: 13,
+    color: "#8E8E93",
+    marginTop: 2,
+  },
+
+  roomAddBtn: {
+    paddingHorizontal: 18,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.12)",
+    backgroundColor: "rgba(255,255,255,0.85)",
+  },
+
+  roomAddBtnActive: {
+    backgroundColor: "#5797F7",
+    borderColor: "#5797F7",
+  },
+
+  roomAddBtnText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#1C1C1E",
+  },
+
+  roomAddBtnTextActive: {
+    color: "#fff",
+  },
+
+  // ── Schedule view ──
+  emptySchedule: {
+    alignItems: "center",
+    paddingTop: 48,
+    paddingHorizontal: 32,
+  },
+  emptyScheduleTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1C1C1E",
+    marginBottom: 8,
+  },
+  emptyScheduleText: {
+    fontSize: 14,
+    color: "#8E8E93",
+    textAlign: "center",
+    lineHeight: 20,
+  },
+  scheduleEntry: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 20,
+    marginTop: 12,
+    padding: 14,
+    backgroundColor: "rgba(255,255,255,0.78)",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "rgba(87,151,247,0.13)",
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
+  },
+  scheduleEntryName: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#1C1C1E",
+    marginBottom: 2,
+  },
+  scheduleEntryRoom: {
+    fontSize: 13,
+    color: "#5797F7",
+    marginBottom: 2,
+  },
+  scheduleEntryMeta: {
+    fontSize: 13,
+    color: "#8E8E93",
+  },
+  scheduleEntryRemove: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: "rgba(120,120,128,0.14)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 10,
+  },
+  scheduleEntryRemoveText: {
+    fontSize: 13,
+    color: "#3C3C43",
+    fontWeight: "600",
+  },
+
+  // ── Action menu modal ──
+  menuOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+    paddingBottom: 34,
+    paddingHorizontal: 16,
+  },
+  menuCard: {
+    backgroundColor: "rgba(250,250,252,0.95)",
+    borderRadius: 20,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 20,
+    shadowOffset: { width: 0, height: 8 },
+  },
+  menuRoomLabel: {
+    textAlign: "center",
+    fontSize: 13,
+    color: "#8E8E93",
+    paddingTop: 14,
+    paddingBottom: 10,
+    paddingHorizontal: 20,
+  },
+  menuItem: {
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    alignItems: "center",
+  },
+  menuItemText: {
+    fontSize: 17,
+    color: "#5797F7",
+    fontWeight: "500",
+  },
+  menuDivider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: "rgba(0,0,0,0.12)",
+    marginHorizontal: 0,
+  },
+
+  // ── Schedule form modal ──
+  modalOuter: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  scheduleFormCard: {
+    backgroundColor: "rgba(248,250,255,0.97)",
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 20,
+    shadowOffset: { width: 0, height: -4 },
+  },
+  modalHandle: {
+    width: 40,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: "rgba(0,0,0,0.18)",
+    alignSelf: "center",
+    marginTop: 12,
+    marginBottom: 18,
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#1C1C1E",
+    marginBottom: 4,
+  },
+  modalSubtitle: {
+    fontSize: 14,
+    color: "#8E8E93",
+    marginBottom: 20,
+  },
+  modalLabel: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#5797F7",
+    marginBottom: 6,
+    marginTop: 14,
+    textTransform: "uppercase",
+    letterSpacing: 0.4,
+  },
+  modalInputBox: {
+    backgroundColor: "rgba(255,255,255,0.85)",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "rgba(87,151,247,0.2)",
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  modalInputText: {
+    fontSize: 16,
+    color: "#1C1C1E",
+  },
+  dayRow: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  dayBtn: {
+    flex: 1,
+    paddingVertical: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.8)",
+    borderWidth: 1,
+    borderColor: "rgba(87,151,247,0.22)",
+  },
+  dayBtnActive: {
+    backgroundColor: "#5797F7",
+    borderColor: "#5797F7",
+  },
+  dayBtnText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#5797F7",
+  },
+  dayBtnTextActive: {
+    color: "#fff",
+  },
+  timeRow: {
+    flexDirection: "row",
+  },
+  modalActions: {
+    flexDirection: "row",
+    gap: 12,
+    marginTop: 24,
+  },
+  modalCancelBtn: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: "center",
+    backgroundColor: "rgba(120,120,128,0.12)",
+  },
+  modalCancelText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#3C3C43",
+  },
+  modalSaveBtn: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: "center",
+    backgroundColor: "#5797F7",
+  },
+  modalSaveText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#fff",
+  },
 
   floorLayoutButton: {
     position: "absolute",
