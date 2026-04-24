@@ -1,145 +1,222 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useState } from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
-export default function Indoormap() {
+const IMG_W = 908;
+const IMG_H = 1692;
 
-  // exits indoor navigation
-  const onContinue = () => {
-      router.push("/map");
-  };
+// All floor images — Ground is shown first; others load when floor changes
+const FLOOR_IMAGES: Record<string, any> = {
+  Ground: require("../assets/images/Ground_floor.png"),
+  Second: require("../assets/images/Second_floor.png"),
+  Third:  require("../assets/images/Third_floor.png"),
+  Fourth: require("../assets/images/Fourth_floor.png"),
+  Fifth:  require("../assets/images/Fifth_floor.png"),
+};
+
+export default function Indoormap() {
+  const { width } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
+
+  const [activeFloor] = useState("Ground");
+  const [zoom, setZoom] = useState(1);
+
+  const imgDisplayH = width * (IMG_H / IMG_W);
+
+  const zoomIn  = () => setZoom(z => Math.min(+(z + 0.25).toFixed(2), 3));
+  const zoomOut = () => setZoom(z => Math.max(+(z - 0.25).toFixed(2), 0.75));
+
+  const onEnd = () => router.push("/map");
 
   return (
-    <SafeAreaView style={styles.container}>
-        {/* top banner for navigation */}
-        <View style={styles.topTab}>
-          <View style={styles.directionBox}>
-            <Text style={styles.distanceText}>3 ft</Text>
-            <Text style={styles.navigationText}>take a left onto path</Text>
-          </View>
-        </View>
+    <View style={styles.container}>
 
-        {/* bottom page for eta and destination */}
-        <View style={styles.bottomTab}>
-          <View style={styles.arrialTimeBox}>
-            <View style={styles.firstRow}>
-              <Text style={styles.timeText}>3 min</Text>
-              <TouchableOpacity style={styles.endButton} onPress={onContinue}>
-                <Text style={styles.buttonText}>end</Text>
-              </TouchableOpacity>
-            </View>
-            
-            <Text style={styles.destinationText}>to CS104 in Computer Science Building</Text>
-          </View>
+      {/* ── Floor plan map ── */}
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{
+          minHeight: imgDisplayH * zoom,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        <View style={{ width, height: imgDisplayH, transform: [{ scale: zoom }] }}>
+          <Image
+            source={FLOOR_IMAGES[activeFloor]}
+            style={{ width, height: imgDisplayH }}
+            resizeMode="stretch"
+          />
         </View>
-        
-    </SafeAreaView>
+      </ScrollView>
+
+      {/* ── Zoom controls ── */}
+      <View style={styles.zoomControls}>
+        <View style={styles.zoomRow}>
+          <TouchableOpacity style={styles.zoomLeft} onPress={zoomIn}>
+            <Text style={styles.zoomText}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.zoomRight} onPress={zoomOut}>
+            <Text style={styles.zoomText}>−</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* ── Top navigation banner ── */}
+      <View style={[styles.topTab, { top: insets.top + 16 }]}>
+        <View style={styles.directionBox}>
+          <Text style={styles.distanceText}>3 ft</Text>
+          <Text style={styles.navigationText}>take a left onto path</Text>
+        </View>
+      </View>
+
+      {/* ── Bottom ETA card ── */}
+      <View style={[styles.bottomTab, { paddingBottom: insets.bottom }]}>
+        <View style={styles.arrivalTimeBox}>
+          <View style={styles.firstRow}>
+            <Text style={styles.timeText}>3 min</Text>
+            <TouchableOpacity style={styles.endButton} onPress={onEnd}>
+              <Text style={styles.buttonText}>end</Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.destinationText}>to CS104 in Computer Science Building</Text>
+        </View>
+      </View>
+
+    </View>
   );
 }
 
-
 const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-
   container: {
     flex: 1,
-    backgroundColor: "#c9c5c5",
+    backgroundColor: "#F2F2F2",
   },
 
+  // ── Top banner ──
   topTab: {
     position: "absolute",
-    top: 100,
-    left: 7,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    display: "flex",
+    left: 16,
+    right: 16,
   },
-
   directionBox: {
-    position: "absolute",
     padding: 20,
-    width: 360,
-    minHeight: 110,
     borderRadius: 20,
     backgroundColor: "#5797F7",
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
   },
-
   distanceText: {
-    color: "#FFFFFF",
+    color: "#fff",
     fontSize: 38,
     fontWeight: "700",
     textAlign: "center",
   },
-
   navigationText: {
     color: "#f3efef",
     fontSize: 24,
     fontWeight: "500",
-    fontFamily: 'SF Pro',
     textAlign: "center",
   },
 
-  arrialTimeBox: {
-    minHeight: 140,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    backgroundColor: "#FFFFFF",
-    alignItems: "flex-start",
-    justifyContent: "center",
-  },
-
+  // ── Bottom card ──
   bottomTab: {
     position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
-    paddingHorizontal: 0,
-    paddingBottom: 0,
-    justifyContent: "center",
   },
-
+  arrivalTimeBox: {
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: "#fff",
+    paddingHorizontal: 24,
+    paddingTop: 20,
+    paddingBottom: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: -4 },
+    elevation: 8,
+  },
+  firstRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 6,
+  },
+  timeText: {
+    fontSize: 32,
+    fontWeight: "600",
+    color: "#000",
+  },
   endButton: {
     width: 100,
     height: 40,
-    left: 145,
-    marginBottom: 15,
     backgroundColor: "#5797F7",
     borderRadius: 18,
     alignItems: "center",
     justifyContent: "center",
   },
-
   buttonText: {
     fontWeight: "600",
     fontSize: 20,
-    textAlign: "center",
-    color: "#FFFFFF",
+    color: "#fff",
   },
-
-  timeText: {
-    fontSize: 32,
-    fontWeight: "600",
-    textAlign: "left",
-    marginBottom: 15,
-    marginLeft: 25,
-    color: "#000000",
-  },
-
   destinationText: {
     fontSize: 18,
-    marginLeft: 25,
     fontWeight: "500",
-    textAlign: "left",
-    color: "#000000",
+    color: "#000",
   },
 
-  firstRow: {
-    justifyContent: "space-between", 
-    alignItems: "center",
-    flexDirection: "row",
+  // ── Zoom controls ──
+  zoomControls: {
+    position: "absolute",
+    bottom: 180,
+    right: 16,
   },
-  
+  zoomRow: {
+    flexDirection: "row",
+    overflow: "hidden",
+    borderRadius: 28,
+    backgroundColor: "rgba(255,255,255,0.88)",
+    shadowColor: "#000",
+    shadowOpacity: 0.22,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 10,
+  },
+  zoomLeft: {
+    width: 56,
+    height: 56,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRightWidth: 1,
+    borderRightColor: "rgba(0,0,0,0.08)",
+  },
+  zoomRight: {
+    width: 56,
+    height: 56,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  zoomText: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#272BA0",
+    lineHeight: 30,
+  },
 });

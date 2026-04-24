@@ -144,6 +144,8 @@ export default function Map() {
   const [scheduleForm, setScheduleForm] = useState({ customName: "", days: [] as string[], startTime: "", endTime: "" });
   const [showActionMenu, setShowActionMenu] = useState(false);
   const [actionMenuRoom, setActionMenuRoom] = useState<Classroom | null>(null);
+  const [showNavOverlay, setShowNavOverlay] = useState(false);
+  const [navTargetName, setNavTargetName] = useState("");
 
   const toggleFavoriteClassroom = (id: string) => {
     setFavoriteClassrooms(prev => {
@@ -164,6 +166,15 @@ export default function Map() {
   const openActionMenu = (room: Classroom) => {
     setActionMenuRoom(room);
     setShowActionMenu(true);
+  };
+
+  const startNavigation = (classroom: Classroom) => {
+    setNavTargetName(classroom.name);
+    setShowNavOverlay(true);
+    setTimeout(() => {
+      setShowNavOverlay(false);
+      router.push("/indoormap");
+    }, 3000);
   };
 
   const openScheduleModal = (room: Classroom) => {
@@ -556,7 +567,7 @@ export default function Map() {
         </View>
 
         <View style={styles.actionRow}>
-          <TouchableOpacity style={styles.navButton}>
+          <TouchableOpacity style={styles.navButton} onPress={() => startNavigation(selectedClassroom)}>
             <Image source={require("@/assets/images/walking_icon.png")} style={styles.navIcon} />
             <Text style={styles.navButtonText}>start navigation</Text>
           </TouchableOpacity>
@@ -862,6 +873,26 @@ export default function Map() {
         </View>
       </BottomSheet>
       </View>
+
+      {/* ── Navigation start overlay ── */}
+      <Modal transparent animationType="fade" visible={showNavOverlay}>
+        <LinearGradient
+          colors={["#F2F2F2", "#5797F7"]}
+          locations={[0, 0.58]}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 1 }}
+          style={styles.navOverlayContainer}
+        >
+          <Image
+            source={require("@/assets/images/location_icon.png")}
+            style={styles.navPin}
+            resizeMode="contain"
+          />
+
+          <Text style={styles.navOverlayTitle}>starting indoor{"\n"}navigation to:</Text>
+          <Text style={styles.navOverlayRoom}>{navTargetName}</Text>
+        </LinearGradient>
+      </Modal>
 
       {/* ── Action menu: Favorite or Schedule ── */}
       <Modal transparent animationType="fade" visible={showActionMenu} onRequestClose={() => setShowActionMenu(false)}>
@@ -1746,6 +1777,33 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     elevation: 6,
   },
+  navOverlayContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  navPin: {
+    width: 100,
+    height: 100,
+    marginBottom: 32,
+  },
+  navOverlayTitle: {
+    fontSize: 30,
+    fontWeight: "700",
+    color: "#272BA0",
+    textAlign: "center",
+    lineHeight: 40,
+    marginBottom: 16,
+  },
+  navOverlayRoom: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#272BA0",
+    textAlign: "center",
+    opacity: 0.85,
+    paddingHorizontal: 32,
+  },
+
   floorLayoutButtonText: {
     color: "#fff",
     fontSize: 16,
