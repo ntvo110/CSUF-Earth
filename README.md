@@ -1,50 +1,47 @@
-# Welcome to your Expo app 👋
+# CSUF Earth
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+CSUF Earth is a mobile application designed to help students and visitors navigate campus efficiently. By combining interative maps, real-time navigation, and indoor positioning, the app provides step-by-step gidance to classrooms and campus locations, reducing confusion and improving on-time arrival.
 
-## Get started
+## Features
 
-1. Install dependencies
+1. search system - find classrooms and buildings quickly through a catalog
+2. interactive campus map - explore campus with a dynamic map interface
+3. real-time navigation - get step-by-step directions to any classroom
+4. indoor positioning - uses Bluetooth Low Energy (BLE) beacons for indoor guidance
+5. User Authentication - Secure login and user management
+6. Schedule builder - save a classoom and start time for use later on
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+### Frontend:
+- React (React Native)
+- TypeScript
+- JavaScript
+- Expo Go
+### Backend & Services:
+- Google Firebase (Firestore, Authentication)
+- Google Maps API
+### Hardware / Indoor Navigation:
+- Bluetooth 5.0 Low Energy (BLE) Beacons
+- Bilateration positioning method
 
-   ```bash
-   npx expo start
-   ```
+## Installation
+### Prerequisites
+- Node.js (v16+)
+- npm or yarn
+- Expo CLI
+- Mobile device with Expo Go installed
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+Steps
 ```
+# Clone the repository
+git clone https://github.com/your-repo/csuf-earth.git
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+# Navigate into the project
+cd csuf-earth
 
-## Learn more
+# Install dependencies
+npm install
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Start the development server
+npx expo start```
