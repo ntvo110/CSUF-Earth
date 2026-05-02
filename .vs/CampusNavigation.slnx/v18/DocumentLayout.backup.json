@@ -1,0 +1,778 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\utilities\\navigationutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\utilities\\navigationutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\indoornavigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\indoornavigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\indoornodeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\indoornodeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\navigationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\navigationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\dtos\\campusnavigationdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\dtos\\campusnavigationdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\models\\indooredge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\models\\indooredge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\models\\building.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\models\\building.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\models\\indoornode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\models\\indoornode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\indooredgecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\indooredgecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\dtos\\indoornodedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\dtos\\indoornodedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\buildingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\buildingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\geofencecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\geofencecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\dtos\\geofencedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\dtos\\geofencedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\iindoornavigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\iindoornavigationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\utilities\\kalmanfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\utilities\\kalmanfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\dtos\\buildingdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\dtos\\buildingdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\buildingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\buildingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\models\\navigationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\models\\navigationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\models\\navigationhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\models\\navigationhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\beaconservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\beaconservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\beaconcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\beaconcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\ibeaconservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\ibeaconservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\beaconrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\beaconrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\ibeaconrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\ibeaconrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\dtos\\beacondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\dtos\\beacondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\models\\beacon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\models\\beacon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\indoornodecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\indoornodecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\iindoornodeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\iindoornodeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\indoornoderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\indoornoderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\iindoornoderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\iindoornoderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\ibuildingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\ibuildingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\services\\iauthenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\services\\iauthenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\dtos\\authenticationdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\dtos\\authenticationdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\dtos\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\dtos\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\campusnavigation.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\campusnavigation.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|z:\\code\\csuf\\capstone\\campusnavigation\\campusnavigation\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{558B1943-6BB5-7EF2-FC1E-DD0D0A8178F6}|CampusNavigation\\CampusNavigation.csproj|solutionrelative:campusnavigation\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "KalmanFilter.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Utilities\\KalmanFilter.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Utilities\\KalmanFilter.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Utilities\\KalmanFilter.cs",
+              "RelativeToolTip": "CampusNavigation\\Utilities\\KalmanFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T19:39:04.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NavigationUtilities.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Utilities\\NavigationUtilities.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Utilities\\NavigationUtilities.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Utilities\\NavigationUtilities.cs",
+              "RelativeToolTip": "CampusNavigation\\Utilities\\NavigationUtilities.cs",
+              "ViewState": "AgIAAG0AAAAAl5mZmZkSwJcAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T19:33:39.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "BeaconController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\BeaconController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\BeaconController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\BeaconController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\BeaconController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T19:55:43.518Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "BeaconService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\BeaconService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\BeaconService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\BeaconService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\BeaconService.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAIwJ4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T05:48:59.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IndoorNodeDTOs.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\IndoorNodeDTOs.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\DTOs\\IndoorNodeDTOs.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\IndoorNodeDTOs.cs",
+              "RelativeToolTip": "CampusNavigation\\DTOs\\IndoorNodeDTOs.cs",
+              "ViewState": "AgIAAA0AAADAmJmZmZk8wCEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T05:50:40.005Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Program.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Program.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Program.cs",
+              "RelativeToolTip": "CampusNavigation\\Program.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAswGoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T23:37:27.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IndoorNode.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\IndoorNode.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Models\\IndoorNode.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\IndoorNode.cs",
+              "RelativeToolTip": "CampusNavigation\\Models\\IndoorNode.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T03:41:39.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Building.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\Building.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Models\\Building.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\Building.cs",
+              "RelativeToolTip": "CampusNavigation\\Models\\Building.cs",
+              "ViewState": "AgIAAAAAAAAeNDMzMzMbwBsAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T00:30:03.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IndoorEdge.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\IndoorEdge.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Models\\IndoorEdge.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\IndoorEdge.cs",
+              "RelativeToolTip": "CampusNavigation\\Models\\IndoorEdge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T03:51:48.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NavigationController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\NavigationController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\NavigationController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\NavigationController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\NavigationController.cs",
+              "ViewState": "AgIAAAAAAABAZ2ZmZuYswBkAAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T05:48:31.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\AuthenticationService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\AuthenticationService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\AuthenticationService.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAkwGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T18:20:00.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IndoorNodeService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IndoorNodeService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\IndoorNodeService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IndoorNodeService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\IndoorNodeService.cs",
+              "ViewState": "AgIAADEAAAAAwMzMzMz4v3kAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T06:03:35.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IndoorNavigationService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IndoorNavigationService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\IndoorNavigationService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IndoorNavigationService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\IndoorNavigationService.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAuwJgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T04:06:01.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "NavigationType.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\NavigationType.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Models\\NavigationType.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\NavigationType.cs",
+              "RelativeToolTip": "CampusNavigation\\Models\\NavigationType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T02:26:35.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CampusNavigationDTOs.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\CampusNavigationDTOs.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\DTOs\\CampusNavigationDTOs.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\CampusNavigationDTOs.cs",
+              "RelativeToolTip": "CampusNavigation\\DTOs\\CampusNavigationDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T03:43:04.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IndoorEdgeController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\IndoorEdgeController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\IndoorEdgeController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\IndoorEdgeController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\IndoorEdgeController.cs",
+              "ViewState": "AgIAAAsAAADwKzMzM7MiwCEAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T19:01:01.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IIndoorNavigationService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IIndoorNavigationService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\IIndoorNavigationService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IIndoorNavigationService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\IIndoorNavigationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T03:55:26.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GeofenceDTOs.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\GeofenceDTOs.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\DTOs\\GeofenceDTOs.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\GeofenceDTOs.cs",
+              "RelativeToolTip": "CampusNavigation\\DTOs\\GeofenceDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T06:12:17.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GeofenceController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\GeofenceController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\GeofenceController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\GeofenceController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\GeofenceController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T06:17:12.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "BuildingService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\BuildingService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\BuildingService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\BuildingService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\BuildingService.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAnwGEAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T02:45:27.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\appsettings.json",
+              "RelativeDocumentMoniker": "CampusNavigation\\appsettings.json",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\appsettings.json",
+              "RelativeToolTip": "CampusNavigation\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-22T21:39:39.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IBeaconService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IBeaconService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\IBeaconService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IBeaconService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\IBeaconService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T05:36:11.632Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "BeaconRepository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\BeaconRepository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\BeaconRepository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\BeaconRepository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\BeaconRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T05:13:18.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IBeaconRepository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IBeaconRepository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\IBeaconRepository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IBeaconRepository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\IBeaconRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T04:59:09.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "BeaconDTOs.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\BeaconDTOs.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\DTOs\\BeaconDTOs.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\BeaconDTOs.cs",
+              "RelativeToolTip": "CampusNavigation\\DTOs\\BeaconDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T04:06:26.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "IndoorNodeController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\IndoorNodeController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\IndoorNodeController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\IndoorNodeController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\IndoorNodeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T00:34:06.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "IndoorNodeRepository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IndoorNodeRepository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\IndoorNodeRepository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IndoorNodeRepository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\IndoorNodeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T06:14:00.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IIndoorNodeRepository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IIndoorNodeRepository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\IIndoorNodeRepository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IIndoorNodeRepository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\IIndoorNodeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T06:10:05.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "IIndoorNodeService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IIndoorNodeService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\IIndoorNodeService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IIndoorNodeService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\IIndoorNodeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T06:03:09.502Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "BuildingController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\BuildingController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\BuildingController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\BuildingController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\BuildingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T03:33:36.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "IBuildingService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IBuildingService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\IBuildingService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IBuildingService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\IBuildingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T02:39:47.257Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "BuildingDTOs.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\BuildingDTOs.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\DTOs\\BuildingDTOs.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\BuildingDTOs.cs",
+              "RelativeToolTip": "CampusNavigation\\DTOs\\BuildingDTOs.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wB8AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T00:16:33.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\IUserRepository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-20T09:09:48.931Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\Repository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\Repository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\Repository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-20T08:43:34.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IRepository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\IRepository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\IRepository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-20T08:35:25.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Data\\AppDbContext.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "CampusNavigation\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAADwv2wAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T06:00:57.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Repositories\\UserRepository.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "CampusNavigation\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T21:17:55.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\AuthController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAowCMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:50:25.617Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "AuthenticationDTOs.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\AuthenticationDTOs.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\DTOs\\AuthenticationDTOs.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\AuthenticationDTOs.cs",
+              "RelativeToolTip": "CampusNavigation\\DTOs\\AuthenticationDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T18:38:07.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "IAuthenticationService.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IAuthenticationService.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Services\\IAuthenticationService.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Services\\IAuthenticationService.cs",
+              "RelativeToolTip": "CampusNavigation\\Services\\IAuthenticationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T18:19:41.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Result.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\Result.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\DTOs\\Result.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\DTOs\\Result.cs",
+              "RelativeToolTip": "CampusNavigation\\DTOs\\Result.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T18:40:49.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "NavigationHistory.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\NavigationHistory.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Models\\NavigationHistory.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\NavigationHistory.cs",
+              "RelativeToolTip": "CampusNavigation\\Models\\NavigationHistory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:00:54.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "User.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\User.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Models\\User.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\User.cs",
+              "RelativeToolTip": "CampusNavigation\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T04:40:07.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Beacon.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\Beacon.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Models\\Beacon.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Models\\Beacon.cs",
+              "RelativeToolTip": "CampusNavigation\\Models\\Beacon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T00:52:59.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "CampusNavigation\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T23:46:34.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "CampusNavigation\\WeatherForecast.cs",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\WeatherForecast.cs",
+              "RelativeToolTip": "CampusNavigation\\WeatherForecast.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T23:46:10.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "CampusNavigation.http",
+              "DocumentMoniker": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\CampusNavigation.http",
+              "RelativeDocumentMoniker": "CampusNavigation\\CampusNavigation.http",
+              "ToolTip": "Z:\\Code\\CSUF\\Capstone\\CampusNavigation\\CampusNavigation\\CampusNavigation.http",
+              "RelativeToolTip": "CampusNavigation\\CampusNavigation.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-04-16T23:43:26.683Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
