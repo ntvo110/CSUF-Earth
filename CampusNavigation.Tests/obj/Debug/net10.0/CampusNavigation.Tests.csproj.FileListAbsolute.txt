@@ -182,3 +182,4 @@ Z:\AI\kiro\CampusNavigation\CampusNavigation.Tests\obj\Debug\net10.0\refint\Camp
 Z:\AI\kiro\CampusNavigation\CampusNavigation.Tests\obj\Debug\net10.0\CampusNavigation.Tests.pdb
 Z:\AI\kiro\CampusNavigation\CampusNavigation.Tests\obj\Debug\net10.0\CampusNavigation.Tests.genruntimeconfig.cache
 Z:\AI\kiro\CampusNavigation\CampusNavigation.Tests\obj\Debug\net10.0\ref\CampusNavigation.Tests.dll
+Z:\AI\kiro\CampusNavigation\CampusNavigation.Tests\obj\Debug\net10.0\CampusNavigation.Tests.sourcelink.json

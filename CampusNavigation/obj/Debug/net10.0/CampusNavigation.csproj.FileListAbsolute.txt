@@ -377,3 +377,4 @@ Z:\AI\kiro\CampusNavigation\CampusNavigation\obj\Debug\net10.0\refint\CampusNavi
 Z:\AI\kiro\CampusNavigation\CampusNavigation\obj\Debug\net10.0\CampusNavigation.pdb
 Z:\AI\kiro\CampusNavigation\CampusNavigation\obj\Debug\net10.0\CampusNavigation.genruntimeconfig.cache
 Z:\AI\kiro\CampusNavigation\CampusNavigation\obj\Debug\net10.0\ref\CampusNavigation.dll
+Z:\AI\kiro\CampusNavigation\CampusNavigation\obj\Debug\net10.0\CampusNavigation.sourcelink.json
