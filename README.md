@@ -55,8 +55,8 @@ csuf-earth/
 |-- components/       # Reusable UI components
 ```
 ## Contributors 
-- Nathan Vo
 - Xareni Merino Rita
+- Nathan Vo
 - Edward Valencia
 - Citlali Cortes Garcia
 - Nicholas Perez
