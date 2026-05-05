@@ -47,13 +47,16 @@ npm install
 npx expo start
 ```
 ## Project Structure
-
 ```
 csuf-earth/
 |-- app/              # main pages for the application
 |-- assets/images/    # Images, floor plans
 |-- components/       # Reusable UI components
 ```
+## Branches
+- Main branch contains the code for the UI and the frontend for the application
+- beacon code has the code for how the beacons would work to figure out position of user and the classrooms
+
 ## Contributors 
 - Xareni Merino Rita
 - Nathan Vo
