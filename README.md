@@ -44,4 +44,19 @@ cd csuf-earth
 npm install
 
 # Start the development server
-npx expo start```
+npx expo start
+```
+## Project Structure
+
+```
+csuf-earth/
+|-- app/              # main pages for the application
+|-- assets/images/    # Images, floor plans
+|-- components/       # Reusable UI components
+```
+## Contributors 
+- Nathan Vo
+- Xareni Merino Rita
+- Edward Valencia
+- Citlali Cortes Garcia
+- Nicholas Perez
