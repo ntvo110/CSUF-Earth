@@ -35,7 +35,7 @@ CSUF Earth is a mobile application designed to help students and visitors naviga
 Steps
 ```
 # Clone the repository
-git clone https://github.com/your-repo/csuf-earth.git
+git clone https://github.com/your-repo/csuf-earth.git](https://github.com/ntvo110/CSUF-Earth)
 
 # Navigate into the project
 cd csuf-earth
