@@ -19,7 +19,7 @@ import { getApps, initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCVe9yRWAZEO_wjLNyaIl_PeB-gJW3uWkk",
+  apiKey: /* ADD KEY HERE */,
   authDomain: "csuf-users-cd8ec.firebaseapp.com",
   projectId: "csuf-users-cd8ec",
   storageBucket: "csuf-users-cd8ec.firebasestorage.app",
